@@ -28,3 +28,5 @@ require("plugin-config.nvim-cmp")
 require("plugin-config.multivim")
 -- hlargs
 require("plugin-config.hlargs")
+-- startupicon
+--require("lua.plugin-config.startupicon")
