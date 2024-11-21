@@ -139,7 +139,25 @@ pluginKeys.mapLSP = function(mapbuf)
   -- mapbuf('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opt)
   -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
 end
+  -- 设置快捷键映射
+-- 检查是否加载了 toggleterm
+local toggleterm_ok, toggleterm = pcall(require, "toggleterm")
+if toggleterm_ok then
+  require("toggleterm").setup()
 
+  -- 定义一个函数来切换终端
+  local function toggle_terminal()
+    vim.cmd("ToggleTerm")
+  end
+
+  -- 设置快捷键映射
+  vim.api.nvim_set_keymap(
+    'n', -- normal 模式
+    '<C-CR>', -- Ctrl + Enter 键
+    '', -- 清空默认映射，确保无冲突
+    { noremap = true, silent = true, callback = toggle_terminal }
+  )
+end
 
 return pluginKeys
 

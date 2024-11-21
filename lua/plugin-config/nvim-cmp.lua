@@ -16,6 +16,7 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- 确认补全
     }),
     sources = cmp.config.sources({
+        { name = 'cmp_tabnine' }, -- Tabnine 补全
         { name = 'nvim_lsp' },   -- LSP 补全
         { name = 'luasnip' },    -- 代码片段补全
         { name = 'path' },       -- 文件路径补全

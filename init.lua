@@ -30,3 +30,8 @@ require("plugin-config.multivim")
 require("plugin-config.hlargs")
 -- startupicon
 --require("lua.plugin-config.startupicon")
+require("plugin-config.cmptabnine")
+-- 括号匹配
+require("plugin-config.iblconfig")
+-- 彩虹括号
+require("plugin-config.tsrainbow")

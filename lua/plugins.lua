@@ -19,6 +19,9 @@ packer.startup({
     -- mason
     use {"williamboman/mason.nvim"}
     -- lsp-config
+    -- ai
+    -- kuohao
+    use "lukas-reineke/indent-blankline.nvim"
     use{"neovim/nvim-lspconfig"}
     -- mason-lspconfig
     -- startup
@@ -60,7 +63,10 @@ end}
     require('smoothcursor').setup()
   end
 }
-        -- Auto Pairs 插件
+    -- tabline
+    use "hrsh7th/nvim-cmp" --completion
+    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+    -- Auto Pairs 插件
     use 'windwp/nvim-autopairs'
     -- nvim-cmp
         -- nvim-cmp 核心插件
