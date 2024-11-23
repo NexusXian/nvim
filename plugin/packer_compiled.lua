@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/nexus/.cache/nvim/packer_hererocks/2.1.1727870382/share/lua/5.1/?.lua;/home/nexus/.cache/nvim/packer_hererocks/2.1.1727870382/share/lua/5.1/?/init.lua;/home/nexus/.cache/nvim/packer_hererocks/2.1.1727870382/lib/luarocks/rocks-5.1/?.lua;/home/nexus/.cache/nvim/packer_hererocks/2.1.1727870382/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/nexus/.cache/nvim/packer_hererocks/2.1.1727870382/lib/lua/5.1/?.so"
+local package_path_str = "/home/nexus/.cache/nvim/packer_hererocks/2.1.1731601260/share/lua/5.1/?.lua;/home/nexus/.cache/nvim/packer_hererocks/2.1.1731601260/share/lua/5.1/?/init.lua;/home/nexus/.cache/nvim/packer_hererocks/2.1.1731601260/lib/luarocks/rocks-5.1/?.lua;/home/nexus/.cache/nvim/packer_hererocks/2.1.1731601260/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/nexus/.cache/nvim/packer_hererocks/2.1.1731601260/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -210,22 +210,11 @@ _G.packer_plugins = {
     path = "/home/nexus/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["startup.nvim"] = {
-    config = { "\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fstartup\frequire\0" },
-    loaded = true,
-    path = "/home/nexus/.local/share/nvim/site/pack/packer/start/startup.nvim",
-    url = "https://github.com/startup-nvim/startup.nvim"
-  },
   ["supermaven-nvim"] = {
     config = { "\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20supermaven-nvim\frequire\0" },
     loaded = true,
     path = "/home/nexus/.local/share/nvim/site/pack/packer/start/supermaven-nvim",
     url = "https://github.com/supermaven-inc/supermaven-nvim"
-  },
-  ["telescope-file-browser.nvim"] = {
-    loaded = true,
-    path = "/home/nexus/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
-    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -233,7 +222,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["toggleterm.nvim"] = {
-    config = { "\27LJ\2\n„\2\0\0\a\0\14\1\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0006\4\5\0009\4\6\0046\6\a\0009\6\b\0069\6\t\6\24\6\0\6B\4\2\2=\4\n\0036\4\5\0009\4\6\0046\6\a\0009\6\b\0069\6\v\6\24\6\0\6B\4\2\2=\4\f\3=\3\r\2B\0\2\1K\0\1\0\15float_opts\vheight\nlines\nwidth\fcolumns\6o\bvim\nfloor\tmath\1\0\3\vheight\0\nwidth\0\vborder\vcurved\1\0\2\15float_opts\0\14direction\nfloat\nsetup\15toggleterm\frequireµæÌ™\19™³¦ÿ\3\0" },
+    config = { "\27LJ\2\n„\2\0\0\a\0\14\1\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0006\4\5\0009\4\6\0046\6\a\0009\6\b\0069\6\t\6\24\6\0\6B\4\2\2=\4\n\0036\4\5\0009\4\6\0046\6\a\0009\6\b\0069\6\v\6\24\6\0\6B\4\2\2=\4\f\3=\3\r\2B\0\2\1K\0\1\0\15float_opts\vheight\nlines\nwidth\fcolumns\6o\bvim\nfloor\tmath\1\0\3\nwidth\0\vheight\0\vborder\vcurved\1\0\2\14direction\nfloat\15float_opts\0\nsetup\15toggleterm\frequireµæÌ™\19™³¦ÿ\3\0" },
     loaded = true,
     path = "/home/nexus/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
@@ -256,18 +245,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: startup.nvim
-time([[Config for startup.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fstartup\frequire\0", "config", "startup.nvim")
-time([[Config for startup.nvim]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\n„\2\0\0\a\0\14\1\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0006\4\5\0009\4\6\0046\6\a\0009\6\b\0069\6\t\6\24\6\0\6B\4\2\2=\4\n\0036\4\5\0009\4\6\0046\6\a\0009\6\b\0069\6\v\6\24\6\0\6B\4\2\2=\4\f\3=\3\r\2B\0\2\1K\0\1\0\15float_opts\vheight\nlines\nwidth\fcolumns\6o\bvim\nfloor\tmath\1\0\3\nwidth\0\vheight\0\vborder\vcurved\1\0\2\14direction\nfloat\15float_opts\0\nsetup\15toggleterm\frequireµæÌ™\19™³¦ÿ\3\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
 -- Config for: supermaven-nvim
 time([[Config for supermaven-nvim]], true)
 try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20supermaven-nvim\frequire\0", "config", "supermaven-nvim")
 time([[Config for supermaven-nvim]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-try_loadstring("\27LJ\2\n„\2\0\0\a\0\14\1\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0006\4\5\0009\4\6\0046\6\a\0009\6\b\0069\6\t\6\24\6\0\6B\4\2\2=\4\n\0036\4\5\0009\4\6\0046\6\a\0009\6\b\0069\6\v\6\24\6\0\6B\4\2\2=\4\f\3=\3\r\2B\0\2\1K\0\1\0\15float_opts\vheight\nlines\nwidth\fcolumns\6o\bvim\nfloor\tmath\1\0\3\vheight\0\nwidth\0\vborder\vcurved\1\0\2\15float_opts\0\14direction\nfloat\nsetup\15toggleterm\frequireµæÌ™\19™³¦ÿ\3\0", "config", "toggleterm.nvim")
-time([[Config for toggleterm.nvim]], false)
 -- Config for: SmoothCursor.nvim
 time([[Config for SmoothCursor.nvim]], true)
 try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17smoothcursor\frequire\0", "config", "SmoothCursor.nvim")

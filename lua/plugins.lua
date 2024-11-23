@@ -25,13 +25,6 @@ packer.startup({
     use{"neovim/nvim-lspconfig"}
     -- mason-lspconfig
     -- startup
-    use {
-  "startup-nvim/startup.nvim",
-  requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim"},
-  config = function()
-    require"startup".setup()
-  end
-}
     use{"williamboman/mason-lspconfig.nvim"}
     -- coc
     use {'neoclide/coc.nvim', branch = 'release'}
