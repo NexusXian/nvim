@@ -12,6 +12,18 @@ return {
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local mason_lsp = require('mason-lspconfig')
 
+      -- 定义格式化函数
+      local format_on_save = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format({ bufnr = bufnr })
+            end,
+          })
+        end
+      end
+
       -- 配置各 LSP 服务器（使用 lspconfig 标准名称）
       -- CSS/SCSS/Less (对应 Mason 包: css-lsp)
       lspconfig.cssls.setup({
@@ -21,11 +33,13 @@ return {
           scss = { validate = true },
           less = { validate = true },
         },
+        on_attach = format_on_save,
       })
 
       -- HTML (对应 Mason 包: html-lsp)
       lspconfig.html.setup({
         capabilities = capabilities,
+        on_attach = format_on_save,
       })
 
       -- ESLint (对应 Mason 包: eslint-lsp)
@@ -36,6 +50,7 @@ return {
             buffer = bufnr,
             command = 'EslintFixAll', -- 保存时自动修复 ESLint 错误
           })
+          format_on_save(client, bufnr)
         end,
       })
 
@@ -51,21 +66,25 @@ return {
             },
           },
         },
+        on_attach = format_on_save,
       })
 
       -- C/C++ (对应 Mason 包: clangd)
       lspconfig.clangd.setup({
         capabilities = capabilities,
+        on_attach = format_on_save,
       })
 
       -- Go (对应 Mason 包: gopls)
       lspconfig.gopls.setup({
         capabilities = capabilities,
+        on_attach = format_on_save,
       })
 
       -- Java (对应 Mason 包: jdtls)
       lspconfig.jdtls.setup({
         capabilities = capabilities,
+        on_attach = format_on_save,
       })
 
       -- Mason-LSP 自动安装配置（使用 lspconfig 标准名称）
@@ -165,4 +184,4 @@ return {
       end
     end,
   },
-}     
+}
