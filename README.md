@@ -1,1 +1,1 @@
-![nvim](/home/nexus/Pictures/nvim.png)
+![nvim](https://github.com/NexusXian/githubImg/blob/master/nvim/nvim.png)	
