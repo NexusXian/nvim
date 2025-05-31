@@ -91,8 +91,7 @@ return {
             },
           })
         end,
-        -- 阿里千问
-        -- https://help.aliyun.com/zh/model-studio/getting-started/models?spm=a2c4g.11186623.0.0.ce3c4823l7PTRL#9f8890ce29g5u
+
         aliyun_qwen = function()
           return require("codecompanion.adapters").extend("openai_compatible", {
             name = "aliyun_qwen",

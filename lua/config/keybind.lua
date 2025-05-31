@@ -7,8 +7,14 @@ vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
 -- 在普通模式下映射 Ctrl + a 为全选操作
 vim.keymap.set('n', '<C-a>', function()
-    vim.cmd('normal! ggVG')
+  vim.cmd('normal! ggVG')
 end, { noremap = true, silent = true })
+
+-- normal模式下使用大写的Y来共享剪切板
+vim.keymap.set('n', 'Y', '"+yy', { noremap = true, silent = true })
+
+--visual模式下使用大写的Y来共享剪切板
+vim.keymap.set('v', 'Y', '"+y', { noremap = true, silent = true })
 
 
 
@@ -42,7 +48,9 @@ map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Signatu
 map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code Action" })
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename Symbol" })
 map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "Format Code" })
-map("n", "<leader>ai", "<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>", { desc = "Organize Imports" })
+map("n", "<leader>ai",
+  "<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>",
+  { desc = "Organize Imports" })
 
 -- 诊断错误
 map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "Previous Diagnostic" })

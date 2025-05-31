@@ -1,5 +1,6 @@
 return {
   "Civitasv/cmake-tools.nvim",
+  ft = { "cmake", "cpp", "c" }, -- 打开CMake/C++/C文件时加载
   opts = {
     cmake_command = "cmake",
     ctest_command = "ctest",
