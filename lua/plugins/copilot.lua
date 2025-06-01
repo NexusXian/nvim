@@ -15,7 +15,7 @@ return {
           open = "<M-CR>"
         },
         layout = {
-          position = "bottom",           -- 可以是 "bottom", "top", "left", "right"
+          position = "bottom", -- 可以是 "bottom", "top", "left", "right"
           ratio = 0.4
         },
       },
@@ -43,7 +43,7 @@ return {
         cvs = false,
         ["."] = false,
       },
-      copilot_node_command = 'node',       -- Node.js 可执行文件的路径
+      copilot_node_command = 'node', -- Node.js 可执行文件的路径
       server_opts_overrides = {},
     })
   end,
