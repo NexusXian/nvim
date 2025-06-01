@@ -6,18 +6,18 @@ return {
       local Terminal = require("toggleterm.terminal").Terminal
 
       require("toggleterm").setup({
-        size = 20, -- 终端窗口的默认大小
+        size = 20,                -- 终端窗口的默认大小
         open_mapping = [[<C-\>]], -- 打开/关闭终端的快捷键
-        hide_numbers = true, -- 隐藏行号
+        hide_numbers = true,      -- 隐藏行号
         shade_filetypes = {},
-        shade_terminals = true, -- 为终端启用背景阴影
-        shading_factor = 2, -- 阴影强度（1-3）
-        start_in_insert = true, -- 打开终端时进入插入模式
-        persist_size = true, -- 记住终端大小
-        direction = "float", -- 终端方向，可选 'vertical', 'horizontal', 'tab', 'float'
+        shade_terminals = true,   -- 为终端启用背景阴影
+        shading_factor = 2,       -- 阴影强度（1-3）
+        start_in_insert = true,   -- 打开终端时进入插入模式
+        persist_size = true,      -- 记住终端大小
+        direction = "float",      -- 终端方向，可选 'vertical', 'horizontal', 'tab', 'float'
         float_opts = {
-          border = "curved", -- 边框样式，可选 'single', 'double', 'shadow', 'curved'
-          winblend = 3, -- 透明度（0 不透明，100 全透明）
+          border = "curved",      -- 边框样式，可选 'single', 'double', 'shadow', 'curved'
+          winblend = 3,           -- 透明度（0 不透明，100 全透明）
         },
       })
 
@@ -26,8 +26,8 @@ return {
 
       -- 动态设置终端命令
       local function set_command_for_filetype()
-        local filetype = vim.bo.filetype -- 获取当前文件类型
-        local filename = vim.fn.expand("%:t") -- 获取当前文件名
+        local filetype = vim.bo.filetype             -- 获取当前文件类型
+        local filename = vim.fn.expand("%:t")        -- 获取当前文件名
         local filename_no_ext = vim.fn.expand("%:r") -- 获取不含扩展名的文件名
 
         if filetype == "go" then
@@ -43,7 +43,7 @@ return {
         elseif filetype == "rust" then
           return "cargo run" -- Rust 项目默认使用 Cargo
         else
-          return nil -- 未支持的文件类型
+          return nil         -- 未支持的文件类型
         end
       end
 
@@ -53,7 +53,7 @@ return {
         if not cmd then
           if dynamic_term then
             dynamic_term:close() -- 直接关闭终端
-            dynamic_term = nil -- 释放资源
+            dynamic_term = nil   -- 释放资源
           end
           print("Unsupported filetype: " .. vim.bo.filetype)
           return
@@ -64,8 +64,8 @@ return {
           dynamic_term = Terminal:new({
             cmd = "bash -c '" .. cmd .. "'", -- 动态命令
             hidden = true,
-            direction = "float", -- 浮动窗口
-            close_on_exit = false, -- 关闭时保持进程
+            direction = "float",             -- 浮动窗口
+            close_on_exit = false,           -- 关闭时保持进程
             on_close = function(term)
               if term.job_id then
                 vim.fn.jobstop(term.job_id) -- 终止进程

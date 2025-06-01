@@ -21,48 +21,47 @@ return {
         },
         center = {
           {
-            icon = ' ',
-            icon_hl = 'Title',
+            icon = '  ',
             desc = 'Find File           ',
             desc_hl = 'String',
             key = 'f',
-            keymap = 'SPC f f',
+            keymap = 'f',
             key_hl = 'Number',
             action = 'Telescope find_files'
           },
           {
-            icon = ' ',
+            icon = '  ',
             desc = 'Find Recent Files   ',
             key = 'r',
-            keymap = 'SPC f r',
+            keymap = 'r',
             action = 'Telescope oldfiles'
           },
           {
-            icon = ' ',
-            desc = 'Find Word           ',
-            key = 'w',
-            keymap = 'SPC f w',
-            action = 'Telescope live_grep'
-          },
-          {
-            icon = ' ',
+            icon = '󰈙  ',
             desc = 'New File            ',
             key = 'n',
-            keymap = 'SPC f n',
+            keymap = 'n',
             action = 'enew'
           },
           {
-            icon = ' ',
+            icon = '󰒲  ',
+            desc = 'Lazy            ',
+            key = 'l',
+            keymap = 'l',
+            action = 'Lazy'
+          },
+          {
+            icon = '  ',
             desc = 'Config              ',
             key = 'c',
-            keymap = 'SPC f c',
+            keymap = 'c',
             action = 'edit ~/.config/nvim/init.lua'
           },
           {
-            icon = ' ',
+            icon = '󰿅  ',
             desc = 'Exit Neovim         ',
             key = 'q',
-            keymap = 'SPC q q',
+            keymap = 'q',
             action = 'qa'
           },
         },
