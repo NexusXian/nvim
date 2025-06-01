@@ -1,50 +1,38 @@
 return {
-  "zbirenbaum/copilot.lua",
-  cmd = "Copilot",
-  event = "InsertEnter",
-  config = function()
-    require("copilot").setup({
-      panel = {
-        enabled = true,
-        auto_refresh = false,
-        keymap = {
-          jump_prev = "[[",
-          jump_next = "]]",
-          accept = "<CR>",
-          refresh = "gr",
-          open = "<M-CR>"
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",       -- 可选：懒加载
+    event = "InsertEnter", -- 在插入模式时加载
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = true,
+          auto_refresh = true,
         },
-        layout = {
-          position = "bottom", -- 可以是 "bottom", "top", "left", "right"
-          ratio = 0.4
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = "<C-l>",      -- 接受整个建议
+            accept_word = "<C-j>", -- 接受一个单词
+            accept_line = "<C-k>", -- 接受整行
+            next = "<C-]>",        -- 下一个建议
+            prev = "<C-[>",        -- 上一个建议
+            dismiss = "<C-e>",     -- 取消建议
+          },
         },
-      },
-      suggestion = {
-        enabled = true,
-        auto_trigger = false,
-        debounce = 75,
-        keymap = {
-          accept = "<M-l>",
-          accept_word = false,
-          accept_line = false,
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<C-]>",
+        filetypes = {
+          yaml = true,
+          markdown = true,
+          help = false,
+          gitcommit = true,
+          gitrebase = true,
+          ["."] = false,
         },
-      },
-      filetypes = {
-        yaml = false,
-        markdown = false,
-        help = false,
-        gitcommit = false,
-        gitrebase = false,
-        hgcommit = false,
-        svn = false,
-        cvs = false,
-        ["."] = false,
-      },
-      copilot_node_command = 'node', -- Node.js 可执行文件的路径
-      server_opts_overrides = {},
-    })
-  end,
+        copilot_node_command = "node", -- Node.js 解释器路径
+        server_opts_overrides = {},
+      })
+    end,
+  },
 }
