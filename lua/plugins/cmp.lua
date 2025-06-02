@@ -13,11 +13,10 @@ return {
     local cmp = require('cmp')
     local luasnip = require('luasnip')
     local lspkind = require('lspkind') -- 引入 lspkind
+
     -- 辅助函数：检查光标前是否有字符
     local has_words_before = function()
-      local cursor = vim.api.nvim_win_get_cursor(0)
-      local line = cursor[1]
-      local col = cursor[2]
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
     require('luasnip.loaders.from_vscode').lazy_load()
@@ -33,15 +32,7 @@ return {
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping({
-          i = function(fallback)
-            if cmp.visible() and cmp.get_active_entry() then
-              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-            else
-              fallback()
-            end
-          end
-        }),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ["<Tab>"] = cmp.mapping({
           i = function(fallback)
             if cmp.visible() then
@@ -62,7 +53,6 @@ return {
             end
           end,
         }),
-
       }),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -103,6 +93,12 @@ return {
             return vim_item
           end
         })
+      },
+      -- 默认选中第一个补全项
+      completion = {
+        completeopt = 'menu,menuone,noinsert',
+        keyword_length = 1,
+        select = true,
       },
     })
   end,
