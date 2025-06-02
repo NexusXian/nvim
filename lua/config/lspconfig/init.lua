@@ -3,7 +3,8 @@ local lspconfig = require('lspconfig')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
 -- 初始化 lspkind
-require('lspkind').init({
+local lspkind = require('lspkind')
+lspkind.init({
   mode = 'symbol_text',
   preset = 'codicons',
   symbol_map = {
@@ -50,7 +51,26 @@ local format_on_save = function(client, bufnr)
   end
 end
 
+-- 自定义补全格式
+local custom_format = function(entry, vim_item)
+  -- 在前面添加图标
+  if lspkind.symbol_map[vim_item.kind] then
+    vim_item.kind = lspkind.symbol_map[vim_item.kind] .. ' ' .. vim_item.kind
+  end
+
+  -- 在后面添加来源说明
+  vim_item.menu = string.format(' [%s]', ({
+    nvim_lsp = 'LSP',
+    luasnip = 'Snippet',
+    buffer = 'Buffer',
+    path = 'Path',
+  })[entry.source.name] or '')
+
+  return vim_item
+end
+
 return {
   capabilities = capabilities,
   format_on_save = format_on_save,
+  format = custom_format, -- 导出自定义格式函数供 cmp 使用
 }
