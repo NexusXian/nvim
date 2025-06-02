@@ -4,9 +4,10 @@ return {
     config = function()
       require("supermaven-nvim").setup({
         keymaps = {
-          accept_suggestion = "<C-CR>",
-          clear_suggestion = "<C-]>",
-          accept_word = "<C-j>",
+          accept_suggestion = "<C-CR>", -- 添加接受建议的快捷键
+          clear_suggestion = "<C-]>",   -- 添加清除建议的快捷键
+          accept_word = "<C-j>",        --# 添加接受单词建议的快捷键
+          accept_line = "<C-l>",        -- 添加接受单行建议的快捷键
         },
         color = {
           suggestion_color = "#A89984",
