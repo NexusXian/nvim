@@ -1,4 +1,4 @@
-![nvim](https://github.com/NexusXian/githubImg/blob/master/nvim/nvim.png)	
+![nvim](https://github.com/NexusXian/githubImg/blob/master/nvim/nvim01.png)	
 
 
 
