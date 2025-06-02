@@ -7,36 +7,35 @@ vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
 -- 在普通模式下映射 Ctrl + a 为全选操作
 vim.keymap.set('n', '<C-a>', function()
-	vim.cmd('normal! ggVG')
+  vim.cmd('normal! ggVG')
 end, { noremap = true, silent = true })
 
 -- normal模式下使用大写的Y来共享剪切板
 vim.keymap.set('n', 'Y', '"+yy', { noremap = true, silent = true })
 
---visual模式下使用大写的Y来共享剪切板
+-- visual模式下使用大写的Y来共享剪切板
 vim.keymap.set('v', 'Y', '"+y', { noremap = true, silent = true })
 
 local term_bufnr = nil
 -- 在普通模式下映射 Ctrl + / 为开启终端
 vim.keymap.set('n', '<C-/>', function()
-	-- 如果已有终端 buffer，并且窗口是可见的，关闭它
-	for _, win in ipairs(vim.api.nvim_list_wins()) do
-		local buf = vim.api.nvim_win_get_buf(win)
-		if buf == term_bufnr then
-			vim.api.nvim_win_close(win, true)
-			return
-		end
-	end
+  -- 如果已有终端 buffer，并且窗口是可见的，关闭它
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if buf == term_bufnr then
+      vim.api.nvim_win_close(win, true)
+      return
+    end
+  end
 
-	-- 否则创建一个新的终端窗口，大小为 10
-	vim.cmd('belowright 10split | terminal')
-	term_bufnr = vim.api.nvim_get_current_buf()
-	vim.cmd('startinsert')
+  -- 否则创建一个新的终端窗口，大小为 10
+  vim.cmd('belowright 10split | terminal')
+  term_bufnr = vim.api.nvim_get_current_buf()
+  vim.cmd('startinsert')
 end, { noremap = true, silent = true })
 
 -- 在终端模式中按 <Esc> 自动切回 normal 模式
 vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
-
 
 -- 插件快捷键配置
 -- nvim-tree 文件树
@@ -69,8 +68,8 @@ map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code 
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename Symbol" })
 map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "Format Code" })
 map("n", "<leader>ai",
-	"<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>",
-	{ desc = "Organize Imports" })
+  "<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>",
+  { desc = "Organize Imports" })
 
 -- 诊断错误
 map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "Previous Diagnostic" })
@@ -81,3 +80,13 @@ map("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Ope
 
 -- AI 辅助编程快捷键
 map("n", "<leader>a", "<cmd>CodeCompanionChat<CR>", { desc = "Open Code Companion Chat" })
+
+-- 文件管理器快捷键
+map("n", "<leader>r", function()
+  require("ranger-nvim").open(true)
+end, {
+  noremap = true,
+  silent = true,
+  desc = "打开文件管理器 (Ranger)",
+})
+
