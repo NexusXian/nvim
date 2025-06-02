@@ -2,7 +2,6 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
-
 -- 在插入模式下将 jk 映射为 Esc
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
