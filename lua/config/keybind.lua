@@ -2,6 +2,7 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+
 -- 在插入模式下将 jk 映射为 Esc
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
@@ -16,6 +17,26 @@ vim.keymap.set('n', 'Y', '"+yy', { noremap = true, silent = true })
 --visual模式下使用大写的Y来共享剪切板
 vim.keymap.set('v', 'Y', '"+y', { noremap = true, silent = true })
 
+local term_bufnr = nil
+-- 在普通模式下映射 Ctrl + / 为开启终端
+vim.keymap.set('n', '<C-/>', function()
+  -- 如果已有终端 buffer，并且窗口是可见的，关闭它
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if buf == term_bufnr then
+      vim.api.nvim_win_close(win, true)
+      return
+    end
+  end
+
+  -- 否则创建一个新的终端窗口，大小为 10
+  vim.cmd('belowright 10split | terminal')
+  term_bufnr = vim.api.nvim_get_current_buf()
+  vim.cmd('startinsert')
+end, { noremap = true, silent = true })
+
+-- 在终端模式中按 <Esc> 自动切回 normal 模式
+vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
 
 
 -- 插件快捷键配置
