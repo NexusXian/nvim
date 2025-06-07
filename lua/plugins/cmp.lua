@@ -19,6 +19,7 @@ return {
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
+
     require('luasnip.loaders.from_vscode').lazy_load()
 
     cmp.setup({
@@ -59,7 +60,22 @@ return {
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
-        { name = 'copilot' },
+        {
+          name = 'copilot',
+          -- 为 Copilot 添加触发条件：只有当光标前有字符时才触发
+          entry_filter = function()
+            local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+            if col == 0 then return false end
+            local current_line = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+            -- 检查当前行是否为空或只有空白字符
+            if current_line:match("^%s*$") then
+              return false
+            end
+            -- 检查光标前是否有非空白字符
+            local before_cursor = current_line:sub(1, col)
+            return before_cursor:match("%S") ~= nil
+          end
+        },
       }),
       formatting = {             -- 添加格式化配置
         format = lspkind.cmp_format({
@@ -94,11 +110,10 @@ return {
           end
         })
       },
-      -- 默认选中第一个补全项
+      -- 修改补全触发条件
       completion = {
         completeopt = 'menu,menuone,noinsert',
         keyword_length = 1,
-        select = true,
       },
     })
   end,
