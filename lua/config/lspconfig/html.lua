@@ -1,7 +1,14 @@
-local lspconfig = require('lspconfig')
-local lsp_common = require('config.lspconfig.init')
+local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 lspconfig.html.setup({
-  capabilities = lsp_common.capabilities,
-  on_attach = lsp_common.format_on_save,
+  capabilities = capabilities,
+  init_options = {
+    configurationSection = { "html", "javascript", "typescript" },
+    embeddedLanguages = {
+      javascript = true,
+      typescript = true, -- 可选
+    },
+    provideFormatter = true,
+  },
 })

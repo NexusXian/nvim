@@ -104,3 +104,7 @@ vim.o.showtabline = 2
 
 -- 使用增强状态栏插件后不再需要 vim 的模式提示
 vim.o.showmode = false
+
+-- 持久化撤销
+vim.o.undofile = true
+vim.o.undodir = vim.fn.stdpath("data") .. "/undo"
