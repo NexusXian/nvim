@@ -17,7 +17,6 @@ return {
     require('config.lspconfig.eslint')
     require('config.lspconfig.lua_ls')
     require('config.lspconfig.clangd')
-    require('config.lspconfig.gopls')
 
     -- 配置 mason-lspconfig
     mason_lsp.setup({

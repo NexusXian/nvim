@@ -8,7 +8,6 @@ return {
       'html-lsp',
       'css-lsp',
       'clangd',
-      'gopls',
     },
   },
   config = function(_, opts)
