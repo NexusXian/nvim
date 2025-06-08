@@ -1,13 +1,31 @@
 return {
-  'projekt0n/github-nvim-theme',
-  name = 'github-theme',
-  lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-  priority = 1000, -- make sure to load this before all the other start plugins
-  config = function()
-    require('github-theme').setup({
-      -- ...
-    })
-
-    vim.cmd('colorscheme github_dark')
-  end,
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000, -- 优先加载主题
+    config = function()
+      require("catppuccin").setup({
+        flavour = "frappe", -- 可选: latte, frappe, macchiato, mocha
+        transparent_background = false,
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          lsp_trouble = true,
+          mason = true,
+          neotree = true,
+          notify = true,
+          nvimtree = true,
+          telescope = true,
+          treesitter = true,
+          which_key = true,
+          indent_blankline = {
+            enabled = true,
+            scope_color = "lavender", -- 可以设为 `lavender` 或其他
+            colored_indent_levels = false,
+          },
+        },
+      })
+      vim.cmd.colorscheme("catppuccin")
+    end,
+  },
 }
