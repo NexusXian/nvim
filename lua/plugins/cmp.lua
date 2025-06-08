@@ -7,14 +7,13 @@ return {
     'hrsh7th/cmp-nvim-lua',
     'L3MON4D3/LuaSnip',
     'rafamadriz/friendly-snippets',
-    'onsails/lspkind.nvim', -- 确保添加 lspkind 依赖
+    'onsails/lspkind.nvim',
   },
   config = function()
     local cmp = require('cmp')
     local luasnip = require('luasnip')
-    local lspkind = require('lspkind') -- 引入 lspkind
+    local lspkind = require('lspkind')
 
-    -- 辅助函数：检查光标前是否有字符
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -33,27 +32,35 @@ return {
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ["<Tab>"] = cmp.mapping({
-          i = function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-            elseif has_words_before() then
-              cmp.complete()
-            else
+        ['<CR>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            local entry = cmp.get_selected_entry()
+            -- 如果没有手动选择任何项，则不自动确认
+            if not entry then
               fallback()
+              return
             end
-          end,
-        }),
-        ["<S-Tab>"] = cmp.mapping({
-          i = function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-            else
-              fallback()
-            end
-          end,
-        }),
+            cmp.confirm({ select = false }) -- 使用 select = false 避免自动选择
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -62,59 +69,43 @@ return {
         { name = 'path' },
         {
           name = 'copilot',
-          -- 为 Copilot 添加触发条件：只有当光标前有字符时才触发
           entry_filter = function()
             local line, col = unpack(vim.api.nvim_win_get_cursor(0))
             if col == 0 then return false end
             local current_line = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
-            -- 检查当前行是否为空或只有空白字符
-            if current_line:match("^%s*$") then
-              return false
-            end
-            -- 检查光标前是否有非空白字符
+            if current_line:match("^%s*$") then return false end
             local before_cursor = current_line:sub(1, col)
             return before_cursor:match("%S") ~= nil
           end
         },
       }),
-      formatting = {             -- 添加格式化配置
+      formatting = {
         format = lspkind.cmp_format({
-          mode = 'symbol_text',  -- 显示图标和文本
-          maxwidth = 50,         -- 最大宽度
-          ellipsis_char = '...', -- 超出宽度时的省略符号
+          mode = 'symbol_text',
+          maxwidth = 50,
+          ellipsis_char = '...',
           fields = { "kind", "abbr", "menu" },
-          -- 为不同的补全源添加图标前缀
           before = function(entry, vim_item)
-            -- 为 Copilot 补全添加图标
             if entry.source.name == 'copilot' then
               vim_item.kind = ' ' .. vim_item.kind
               vim_item.kind_hl_group = 'CmpItemKindCopilot'
-            end
-
-            -- 为 luasnip 补全添加图标
-            if entry.source.name == 'luasnip' then
+            elseif entry.source.name == 'luasnip' then
               vim_item.kind = ' ' .. vim_item.kind
-            end
-
-            -- 为 buffer 补全添加图标
-            if entry.source.name == 'buffer' then
+            elseif entry.source.name == 'buffer' then
               vim_item.kind = ' ' .. vim_item.kind
-            end
-
-            -- 为 path 补全添加图标
-            if entry.source.name == 'path' then
+            elseif entry.source.name == 'path' then
               vim_item.kind = ' ' .. vim_item.kind
             end
-
             return vim_item
-          end
+          end,
         })
       },
-      -- 修改补全触发条件
       completion = {
-        completeopt = 'menu,menuone,noinsert',
+        completeopt = 'menu,menuone,noselect', -- 关键变化：使用 noselect 而不是 noinsert
         keyword_length = 1,
       },
+      -- 新增：预选择配置
+      preselect = cmp.PreselectMode.None, -- 禁用预选择
     })
   end,
 }
