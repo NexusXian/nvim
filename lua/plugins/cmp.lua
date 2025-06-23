@@ -14,12 +14,23 @@ return {
     local luasnip = require('luasnip')
     local lspkind = require('lspkind')
 
+    -- 加载 snippet 文件
+    require('luasnip.loaders.from_vscode').lazy_load() -- friendly-snippets
+    require('luasnip.loaders.from_lua').load({ paths = "~/.config/nvim/lua/snippets" }) -- 你自己的片段
+
+    -- LuaSnip 快捷键绑定（可选）
+    vim.keymap.set({ "i", "s" }, "<C-j>", function()
+      if luasnip.jumpable(1) then luasnip.jump(1) end
+    end, { silent = true })
+
+    vim.keymap.set({ "i", "s" }, "<C-k>", function()
+      if luasnip.jumpable(-1) then luasnip.jump(-1) end
+    end, { silent = true })
+
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
-
-    require('luasnip.loaders.from_vscode').lazy_load()
 
     cmp.setup({
       snippet = {
@@ -35,12 +46,11 @@ return {
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             local entry = cmp.get_selected_entry()
-            -- 如果没有手动选择任何项，则不自动确认
             if not entry then
               fallback()
               return
             end
-            cmp.confirm({ select = false }) -- 使用 select = false 避免自动选择
+            cmp.confirm({ select = false })
           else
             fallback()
           end
@@ -48,6 +58,8 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
           elseif has_words_before() then
             cmp.complete()
           else
@@ -57,6 +69,8 @@ return {
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end
@@ -101,11 +115,11 @@ return {
         })
       },
       completion = {
-        completeopt = 'menu,menuone,noselect', -- 关键变化：使用 noselect 而不是 noinsert
+        completeopt = 'menu,menuone,noselect',
         keyword_length = 1,
       },
-      -- 新增：预选择配置
-      preselect = cmp.PreselectMode.None, -- 禁用预选择
+      preselect = cmp.PreselectMode.None,
     })
   end,
 }
+

@@ -22,6 +22,8 @@ return {
           gitrebase = true,
           ["."] = false,
         },
+        enabled = false,
+
         copilot_node_command = "node", -- Node.js 解释器路径
         server_opts_overrides = {},
       })

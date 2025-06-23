@@ -41,6 +41,10 @@ return {
           return "gcc " .. filename .. " -o " .. filename_no_ext .. " && ./" .. filename_no_ext
         elseif filetype == "python" then
           return "python3 " .. filename
+        elseif filetype == "dart" then
+          return "dart " .. filename
+        elseif filetype == "typescript" then
+          return "ts-node " .. filename
         elseif filetype == "rust" then
           return "cargo run" -- Rust 项目默认使用 Cargo
         else
