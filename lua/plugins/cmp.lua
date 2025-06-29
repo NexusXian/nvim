@@ -15,7 +15,7 @@ return {
     local lspkind = require('lspkind')
 
     -- 加载 snippet 文件
-    require('luasnip.loaders.from_vscode').lazy_load() -- friendly-snippets
+    require('luasnip.loaders.from_vscode').lazy_load()                                  -- friendly-snippets
     require('luasnip.loaders.from_lua').load({ paths = "~/.config/nvim/lua/snippets" }) -- 你自己的片段
 
     -- LuaSnip 快捷键绑定（可选）
@@ -122,4 +122,3 @@ return {
     })
   end,
 }
-

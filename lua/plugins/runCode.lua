@@ -44,7 +44,7 @@ return {
         elseif filetype == "dart" then
           return "dart " .. filename
         elseif filetype == "typescript" then
-          return "ts-node " .. filename
+          return "node " .. filename
         elseif filetype == "rust" then
           return "cargo run" -- Rust 项目默认使用 Cargo
         else
