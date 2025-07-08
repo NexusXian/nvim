@@ -90,3 +90,16 @@ end, {
   desc = "打开文件管理器 (Ranger)",
 })
 
+
+--CompetiTest
+vim.keymap.set('n', '<leader>cr', ':CompetiTest run<CR>', {
+  noremap = true,
+  silent = true,
+  desc = "运行测试"
+})
+
+vim.keymap.set('n', '<leader>cp', ':CompetiTest receive problem<CR>', {
+  noremap = true,
+  silent = true,
+  desc = "接收题目"
+})
