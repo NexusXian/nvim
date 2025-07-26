@@ -3,22 +3,22 @@ local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- 在插入模式下将 jk 映射为 Esc
-vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
+map('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
 -- 在普通模式下映射 Ctrl + a 为全选操作
-vim.keymap.set('n', '<C-a>', function()
+map('n', '<C-a>', function()
   vim.cmd('normal! ggVG')
 end, { noremap = true, silent = true })
 
 -- normal模式下使用大写的Y来共享剪切板
-vim.keymap.set('n', 'Y', '"+yy', { noremap = true, silent = true })
+map('n', 'Y', '"+yy', { noremap = true, silent = true })
 
 -- visual模式下使用大写的Y来共享剪切板
-vim.keymap.set('v', 'Y', '"+y', { noremap = true, silent = true })
+map('v', 'Y', '"+y', { noremap = true, silent = true })
 
 local term_bufnr = nil
 -- 在普通模式下映射 Ctrl + / 为开启终端
-vim.keymap.set('n', '<C-/>', function()
+map('n', '<C-/>', function()
   -- 如果已有终端 buffer，并且窗口是可见的，关闭它
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf = vim.api.nvim_win_get_buf(win)
@@ -78,6 +78,11 @@ map("n", "<leader>dl", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "Ope
 map("n", "<leader>dq", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "Open Diagnostics Quickfix List" })
 map("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Open Floating Diagnostic" })
 
+-- LSP 格式化
+map('n', '<leader>f', function()
+  vim.lsp.buf.format({ async = true })
+end, { desc = 'LSP: 格式化当前缓冲区' })
+
 -- AI 辅助编程快捷键
 map("n", "<leader>a", "<cmd>CodeCompanionChat<CR>", { desc = "Open Code Companion Chat" })
 
@@ -92,14 +97,62 @@ end, {
 
 
 --CompetiTest
-vim.keymap.set('n', '<leader>cr', ':CompetiTest run<CR>', {
+map('n', '<leader>cr', ':CompetiTest run<CR>', {
   noremap = true,
   silent = true,
   desc = "运行测试"
 })
 
-vim.keymap.set('n', '<leader>cp', ':CompetiTest receive problem<CR>', {
+map('n', '<leader>cp', ':CompetiTest receive problem<CR>', {
   noremap = true,
   silent = true,
   desc = "接收题目"
 })
+
+
+--nvim-dap
+-- 基本调试控制
+map("n", "<F5>", function() require("dap").continue() end,
+  { desc = "DAP: 开始/继续调试" })
+map("n", "<F10>", function() require("dap").step_over() end,
+  { desc = "DAP: 单步跳过" })
+map("n", "<F11>", function() require("dap").step_into() end,
+  { desc = "DAP: 单步进入" })
+map("n", "<F12>", function() require("dap").step_out() end,
+  { desc = "DAP: 单步跳出" })
+map("n", "<F6>", function() require("dap").terminate() end,
+  { desc = "DAP: 终止调试会话" })
+map("n", "<F9>", function() require("dap").restart() end,
+  { desc = "DAP: 重启调试" })
+
+-- 断点控制
+map("n", "<leader>b", function() require("dap").toggle_breakpoint() end,
+  { desc = "DAP: 切换断点" })
+map("n", "<leader>B", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
+  { desc = "DAP: 设置条件断点" })
+map("n", "<leader>lp", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end,
+  { desc = "DAP: 设置日志点" })
+map("n", "<leader>cb", function() require("dap").clear_breakpoints() end,
+  { desc = "DAP: 清除所有断点" })
+
+-- 调试 UI
+map("n", "<leader>du", function() require("dapui").toggle() end,
+  { desc = "DAP: 切换调试 UI" })
+map("n", "<leader>dr", function() require("dap").repl.open() end,
+  { desc = "DAP: 打开 REPL" })
+map("n", "<leader>dl", function() require("dap").run_last() end,
+  { desc = "DAP: 重新运行上次调试配置" })
+
+-- 变量和状态查看
+map({ "n", "v" }, "<leader>dh", function() require("dap.ui.widgets").hover() end,
+  { desc = "DAP: 悬停查看变量" })
+map({ "n", "v" }, "<leader>dp", function() require("dap.ui.widgets").preview() end,
+  { desc = "DAP: 预览变量" })
+map("n", "<leader>df", function()
+  local widgets = require("dap.ui.widgets")
+  widgets.centered_float(widgets.frames)
+end, { desc = "DAP: 查看调用栈" })
+map("n", "<leader>ds", function()
+  local widgets = require("dap.ui.widgets")
+  widgets.centered_float(widgets.scopes)
+end, { desc = "DAP: 查看作用域变量" })

@@ -8,5 +8,4 @@ lspconfig.cssls.setup({
     scss = { validate = true },
     less = { validate = true },
   },
-  on_attach = lsp_common.format_on_save,
 })

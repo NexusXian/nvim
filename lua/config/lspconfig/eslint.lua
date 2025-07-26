@@ -9,6 +9,5 @@ lspconfig.eslint.setup({
       buffer = bufnr,
       command = 'EslintFixAll',
     })
-    lsp_common.format_on_save(client, bufnr)
   end,
 })
