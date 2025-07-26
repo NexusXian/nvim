@@ -77,7 +77,6 @@ map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", { desc = "Next Diagnos
 map("n", "<leader>dl", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "Open Diagnostics Location List" })
 map("n", "<leader>dq", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "Open Diagnostics Quickfix List" })
 map("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Open Floating Diagnostic" })
-
 -- LSP 格式化
 map('n', '<leader>f', function()
   vim.lsp.buf.format({ async = true })
@@ -109,6 +108,8 @@ map('n', '<leader>cp', ':CompetiTest receive problem<CR>', {
   desc = "接收题目"
 })
 
+-- flutterTree
+map('n', '<leader>fo', '<cmd>FlutterOutlineToggle<CR>', { desc = 'Toggle Flutter Outline' })
 
 --nvim-dap
 -- 基本调试控制
