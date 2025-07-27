@@ -1,6 +1,6 @@
 -- utf8
 vim.g.encoding = "UTF-8"
-vim.o.fileencoding = 'utf-8'
+vim.api.nvim_set_option_value('fileencoding', 'utf-8', { scope = 'global' })
 
 -- jkhl 移动时光标周围保留8行
 vim.o.scrolloff = 8
@@ -83,7 +83,6 @@ vim.o.splitright = true
 vim.o.completeopt = "menu,menuone,noselect,noinsert"
 
 -- 样式
-vim.o.background = "dark"
 vim.o.termguicolors = true
 
 -- 不可见字符的显示，这里只把空格显示为一个点

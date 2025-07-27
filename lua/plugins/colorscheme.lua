@@ -1,31 +1,10 @@
 return {
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000, -- 优先加载主题
+    "tandy1229/deus.nvim",
+    lazy = false, -- 确保主题在启动时加载
+    priority = 1000, -- 确保主题优先级最高
     config = function()
-      require("catppuccin").setup({
-        flavour = "frappe", -- 可选: latte, frappe, macchiato, mocha
-        transparent_background = false,
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-          lsp_trouble = true,
-          mason = true,
-          neotree = true,
-          notify = true,
-          nvimtree = true,
-          telescope = true,
-          treesitter = true,
-          which_key = true,
-          indent_blankline = {
-            enabled = true,
-            scope_color = "lavender", -- 可以设为 `lavender` 或其他
-            colored_indent_levels = false,
-          },
-        },
-      })
-      vim.cmd.colorscheme("catppuccin")
+      vim.cmd([[colorscheme deus]])
     end,
   },
 }

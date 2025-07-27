@@ -158,3 +158,9 @@ end, { desc = "DAP: View scopes" })
 map('n', '<Leader>;', api.pick, { desc = "Dropbar: Pick element" })
 map('n', '[c', api.goto_context_start, { desc = "Dropbar: Go to context start" })
 map('n', ']c', api.select_next_context, { desc = "Dropbar: Select next context" })
+
+-- 普通模式：<leader>cc 注释当前行，<leader>cu 取消注释
+map('n', '<leader>cc', ':TComment<CR>', { desc = '取消/注释当前行' })
+
+-- 可视模式：<leader>cc 注释选中区域，<leader>cu 取消选中区域注释
+map('v', '<leader>cc', ":'<,'>TComment<CR>", { desc = '取消/注释选中区域' })
