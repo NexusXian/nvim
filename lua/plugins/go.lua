@@ -14,8 +14,8 @@ return {
       trouble = false,
 
       -- 格式化设置
-      gofmt = 'gofumpt',     -- 使用 gofumpt 而不是 gofmt
-      goimports = 'gofumpt', -- 使用 gofumpt 进行导入整理
+      gofmt = 'gofmt',     -- 使用 gofumpt 而不是 gofmt
+      goimports = 'gofmt', -- 使用 gofumpt 进行导入整理
 
       -- 自动格式化
       fmt_on_save = true, -- 保存时自动格式化
