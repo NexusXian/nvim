@@ -1,6 +1,7 @@
 -- 快捷函数
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
+local api = require("dropbar.api")
 
 -- 在插入模式下将 jk 映射为 Esc
 map('i', 'jk', '<Esc>', { noremap = true, silent = true })
@@ -157,3 +158,9 @@ map("n", "<leader>ds", function()
   local widgets = require("dap.ui.widgets")
   widgets.centered_float(widgets.scopes)
 end, { desc = "DAP: 查看作用域变量" })
+
+-- dropbar
+map('n', '<Leader>;', api.pick)
+map('n', '[c', api.goto_context_start)
+map('n', ']c', api.select_next_context)
+
