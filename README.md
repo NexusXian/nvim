@@ -169,6 +169,9 @@ nvim
 | 模式 | 快捷键 | 说明 | 插件来源 |
 |------|--------|------|----------|
 | n | `<Leader>a` | 打开CodeCompanion AI聊天窗口 | `codecompanion` |
+| i | `<C-Return>` | 应用supermaven代码补全 | `supermaven` |
+| n | `ga` | 应用CodeCompanion代码修改 | `codecompanion` |
+
 
 ### 🧪 竞赛编程（Competitive Programming）
 
@@ -220,6 +223,17 @@ nvim
 | n | `<Leader>cc` | 注释/取消注释当前行 | `tcomment.nvim` |
 | v | `<Leader>cc` | 注释/取消注释选中区域 | `tcomment.nvim` |
 
+### 📜 代码补全与片段
+
+| 模式   | 快捷键       | 说明                                                                 | 插件来源          |
+|--------|--------------|----------------------------------------------------------------------|-------------------|
+| i, s   | `<C-b>`      | 向上滚动补全文档预览 4 行                                            | nvim-cmp          |
+| i, s   | `<C-f>`      | 向下滚动补全文档预览 4 行                                            | nvim-cmp          |
+| i, s   | `<C-Space>`  | 手动触发代码补全菜单                                                 | nvim-cmp          |
+| i, s   | `<C-e>`      | 取消当前补全操作（关闭补全菜单）                                     | nvim-cmp          |
+| i, s   | `<CR>`       | 确认选中的补全项（仅在补全可见且有选中项时生效，否则执行默认回车功能） | nvim-cmp          |
+| i, s   | `<Tab>`      | 1. 补全可见时选中下一个补全项；2. 可展开/跳转 LuaSnip 片段；3. 触发补全 | nvim-cmp、LuaSnip |
+| i, s   | `<S-Tab>`    | 1. 补全可见时选中上一个补全项；2. 可回退 LuaSnip 片段跳转             | nvim-cmp、LuaSnip |
 ---
 
 ## 📝 补充说明
