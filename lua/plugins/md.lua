@@ -1,8 +1,11 @@
--- For `plugins/markview.lua` users.
 return {
   "OXY2DEV/markview.nvim",
+  ft = "markdown", -- 只在 Markdown 文件时加载
   dependencies = {
-    "saghen/blink.cmp"
+    "saghen/blink.cmp",
   },
-  event = "VeryLazy",
+  config = function()
+    require("markview").setup()
+  end,
 }
+
