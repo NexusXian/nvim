@@ -107,3 +107,8 @@ vim.o.showmode = false
 -- 持久化撤销
 vim.o.undofile = true
 vim.o.undodir = vim.fn.stdpath("data") .. "/undo"
+
+--保存缓冲区确认
+vim.o.confirm = true
+
+
