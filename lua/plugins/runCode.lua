@@ -1,6 +1,5 @@
 return {
   {
-    keys = 'r',
     "akinsho/toggleterm.nvim",
     version = "*", -- 或指定版本号，例如 "v2.*"
     config = function()
