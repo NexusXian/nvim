@@ -1,14 +1,7 @@
 # 🌟NexusNvim
 
-███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
-████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝
-██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
-██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
-██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
-╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-                                           
 
-
+![sexImg](https://github.com/NexusXian/githubImg/blob/master/bg/ttk.png)
 ![主页面](https://github.com/NexusXian/githubImg/blob/master/nvim/neovim01.png)
 ![查找文件](https://github.com/NexusXian/githubImg/blob/master/nvim/neovim02.png)
 ![nvim.lazy](https://github.com/NexusXian/githubImg/blob/master/nvim/neovim03.png)
@@ -17,6 +10,7 @@
 ![ai补全](https://github.com/NexusXian/githubImg/blob/master/nvim/neovim06.png)
 ![代码补全](https://github.com/NexusXian/githubImg/blob/master/nvim/neovim07.png)
 ![lsp源码介绍](https://github.com/NexusXian/githubImg/blob/master/nvim/neovim08.png)
+![代码运行](https://github.com/NexusXian/githubImg/blob/master/nvim/neovim09.png)
 
 本配置适用于追求简洁、高效、现代化体验的 Neovim 用户，预配置了包括 LSP、DAP、自动补全、文件管理、终端、注释、Flutter、Go、LiveServer 等插件，支持多语言开发。
 
@@ -29,7 +23,7 @@
 ### 1. 克隆配置
 
 ```bash
-git clone https://github.com/yourname/your-nvim-config ~/.config/nvim
+git clone https://github.com/NexusXian/nvim.git ~/.config/nvim
 ```
 
 ### 2. 安装 Neovim 最新版（建议 v0.9+）
