@@ -104,7 +104,7 @@ return {
             },
             schema = {
               model = {
-                default = "qwen-coder-plus-latest",
+                default = "qwen3-coder-plus",
               },
             },
           })

@@ -8,6 +8,7 @@ return {
       'html-lsp',
       'css-lsp',
       'clangd',
+      'pyright',
     },
   },
   config = function(_, opts)
