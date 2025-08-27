@@ -164,3 +164,21 @@ map('n', '<leader>cc', ':TComment<CR>', { desc = '取消/注释当前行' })
 
 -- 可视模式：<leader>cc 注释选中区域，<leader>cu 取消选中区域注释
 map('v', '<leader>cc', ":'<,'>TComment<CR>", { desc = '取消/注释选中区域' })
+
+
+map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Find Files (包括隐藏文件)' })
+map('n', '<leader>fF', '<cmd>Telescope find_files no_ignore=true<cr>', { desc = 'Find Files (包括忽略文件)' })
+
+-- 内容搜索
+map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { desc = '项目内内容搜索' })
+map('n', '<leader>fG', '<cmd>Telescope live_grep grep_open_files=true<cr>', { desc = '仅搜索打开的文件内容' })
+
+-- 缓冲区相关
+map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { desc = '搜索缓冲区' })
+map('n', '<leader>fB', '<cmd>Telescope buffers show_all_buffers=true<cr>', { desc = '搜索所有缓冲区' })
+
+-- 特定场景搜索
+map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { desc = '搜索帮助文档' })
+map('n', '<leader>fm', '<cmd>Telescope marks<cr>', { desc = '搜索标记' })
+map('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { desc = '搜索诊断信息' })
+map('n', '<leader>fc', '<cmd>Telescope commands<cr>', { desc = '搜索命令' })
