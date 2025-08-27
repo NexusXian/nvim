@@ -35,7 +35,7 @@ return {
         elseif filetype == "java" then
           return "javac " .. filename .. " && java " .. filename_no_ext
         elseif filetype == "cpp" then
-          return "g++ " .. filename .. " -o " .. filename_no_ext .. " && ./" .. filename_no_ext
+          return "g++ -std=c++23 " .. filename .. " -o " .. filename_no_ext .. " && ./" .. filename_no_ext
         elseif filetype == "c" then
           return "gcc " .. filename .. " -o " .. filename_no_ext .. " && ./" .. filename_no_ext
         elseif filetype == "python" then
