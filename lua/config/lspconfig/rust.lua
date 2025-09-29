@@ -1,17 +1,16 @@
-local lspconfig = require('lspconfig')
-local lsp_common = require('config.lspconfig.init')
+local lsp_common = require('config.lspconfig.init')  -- 保留通用配置引用
 
-lspconfig.rust_analyzer.setup({
-  on_attach = lsp_common.on_attach,  -- 从通用配置中获取 on_attach
-  capabilities = lsp_common.capabilities,  -- 从通用配置中获取 capabilities
+vim.lsp.config('rust_analyzer', {
+  on_attach = lsp_common.on_attach,  -- 复用通用 on_attach（如快捷键、格式化）
+  capabilities = lsp_common.capabilities,  -- 复用通用补全能力
   settings = {
     ["rust-analyzer"] = {
       checkOnSave = {
         enable = true,
-        command = "clippy"  -- 保存时用 clippy 检查（需确保 clippy 已安装：rustup component add clippy）
+        command = "clippy"  -- 保存时用 clippy 进行严格检查（需安装：rustup component add clippy）
       },
       rustfmt = {
-        enable = true  -- 启用 rustfmt 格式化支持
+        enable = true  -- 启用 rustfmt 自动格式化
       },
       cargo = {
         allFeatures = true  -- 启用所有 Cargo 特性
@@ -24,3 +23,6 @@ lspconfig.rust_analyzer.setup({
     }
   }
 })
+
+-- 启用 rust_analyzer（自动在 .rs 文件中激活）
+vim.lsp.enable('rust_analyzer')

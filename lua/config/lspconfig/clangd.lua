@@ -1,7 +1,7 @@
-local lspconfig = require('lspconfig')
 local lsp_common = require('config.lspconfig.init')
 
-lspconfig.clangd.setup({
+-- 配置 clangd（替代原 lspconfig.clangd.setup）
+vim.lsp.config('clangd', {
   capabilities = lsp_common.capabilities,
   cmd = {
     "clangd",
@@ -10,9 +10,10 @@ lspconfig.clangd.setup({
     "--clang-tidy",
     "--completion-style=detailed",
     "--header-insertion=never",
-    -- 可以根据需要添加其他clangd参数
   },
   init_options = {
-    fallbackFlags = { "-std=c++23" }  -- 这里是关键修正
+    fallbackFlags = { "-std=c++23" }  -- 指定 C++23 标准
   }
 })
+
+vim.lsp.enable('clangd')

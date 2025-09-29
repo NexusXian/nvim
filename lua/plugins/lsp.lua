@@ -17,6 +17,7 @@ return {
     require('config.lspconfig.eslint')
     require('config.lspconfig.lua_ls')
     require('config.lspconfig.clangd')
+    require('config.lspconfig.rust')
     -- 配置 mason-lspconfig
     mason_lsp.setup({
       ensure_installed = {
