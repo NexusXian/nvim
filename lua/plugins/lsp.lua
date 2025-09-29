@@ -26,6 +26,7 @@ return {
         'cssls',
         'clangd',
         'gopls',
+        'rust_analyzer',
       },
       automatic_installation = true,
     })
