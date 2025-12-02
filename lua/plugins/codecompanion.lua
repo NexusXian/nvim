@@ -84,9 +84,9 @@ return {
               },
               schema = {
                 model = {
-                  default = "deepseek-r1",
+                  default = "deepseek-v3.2-exp",
                   choices = {
-                    ["deepseek-r1"] = { opts = { can_reason = true } },
+                    ["deepseek-v3.2-exp"] = { opts = { can_reason = true } },
                   },
                 },
               },
@@ -123,6 +123,22 @@ return {
           end,
         }
       },
+          aliyun_zhipu= function()
+            return require("codecompanion.adapters").extend("openai_compatible", {
+              name = "aliyun_zhipu",
+              env = {
+                url = "https://dashscope.aliyuncs.com/compatible-mode/v1",
+                api_key = function()
+                  return os.getenv("DEEPSEEK_API_ALIYUN")
+                end,
+              },
+              schema = {
+                model = {
+                  default = "glm-4.6",
+                },
+              },
+            })
+          end,
 
       strategies = {
         chat = { adapter = "aliyun_deepseek" },

@@ -7,7 +7,7 @@ return {
 
       require("toggleterm").setup({
         size = 20,                -- 终端窗口的默认大小
-        open_mapping = [[<C-\>]], -- 打开/关闭终端的快捷键
+        open_mapping = [[<leader>t]], -- 打开/关闭终端的快捷键
         hide_numbers = true,      -- 隐藏行号
         shade_filetypes = {},
         shade_terminals = true,   -- 为终端启用背景阴影
@@ -96,7 +96,7 @@ return {
       })
 
       -- 为快捷键绑定动态终端
-      vim.keymap.set("n", "r", toggle_dynamic_term, { noremap = true, silent = true })
+      vim.keymap.set("n", "m", toggle_dynamic_term, { noremap = true, silent = true })
     end,
   },
 }
