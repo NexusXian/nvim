@@ -12,13 +12,13 @@ return {
   config = function()
     local cmp = require('cmp')
     local luasnip = require('luasnip')
-    local lspkind = require('lspkind')
+    -- local lspkind = require('lspkind')
 
-    -- 加载 snippet 文件
-    require('luasnip.loaders.from_vscode').lazy_load()                                  -- friendly-snippets
-    require('luasnip.loaders.from_lua').load({ paths = "~/.config/nvim/lua/snippets" }) -- 你自己的片段
+    -- 加载 snippet
+    require('luasnip.loaders.from_vscode').lazy_load()
+    require('luasnip.loaders.from_lua').load({ paths = "~/.config/nvim/lua/snippets" })
 
-    -- LuaSnip 快捷键绑定（可选）
+    -- 跳转快捷键
     vim.keymap.set({ "i", "s" }, "<C-j>", function()
       if luasnip.jumpable(1) then luasnip.jump(1) end
     end, { silent = true })
@@ -29,7 +29,10 @@ return {
 
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      return col ~= 0
+        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+            :sub(col, col)
+            :match("%s") == nil
     end
 
     cmp.setup({
@@ -93,27 +96,22 @@ return {
           end
         },
       }),
-      formatting = {
-        format = lspkind.cmp_format({
-          mode = 'symbol_text',
-          maxwidth = 50,
-          ellipsis_char = '...',
-          fields = { "kind", "abbr", "menu" },
-          before = function(entry, vim_item)
-            if entry.source.name == 'copilot' then
-              vim_item.kind = ' ' .. vim_item.kind
-              vim_item.kind_hl_group = 'CmpItemKindCopilot'
-            elseif entry.source.name == 'luasnip' then
-              vim_item.kind = ' ' .. vim_item.kind
-            elseif entry.source.name == 'buffer' then
-              vim_item.kind = ' ' .. vim_item.kind
-            elseif entry.source.name == 'path' then
-              vim_item.kind = ' ' .. vim_item.kind
-            end
-            return vim_item
-          end,
-        })
-      },
+      -- formatting = {
+      --   format = lspkind.cmp_format({
+      --     -- mode = 'symbol_text',         -- ✅ 保留图标
+      --     maxwidth = 50,
+      --     ellipsis_char = '...',
+      --     fields = { "kind", "abbr", "menu" },
+      --
+      --     before = function(entry, vim_item)
+      --       -- 可选：高亮 copilot 项（图标不变）
+      --       if entry.source.name == 'copilot' then
+      --         vim_item.kind_hl_group = 'CmpItemKindCopilot'
+      --       end
+      --       return vim_item
+      --     end,
+      --   }),
+      -- },
       completion = {
         completeopt = 'menu,menuone,noselect',
         keyword_length = 1,

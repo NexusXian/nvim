@@ -9,6 +9,8 @@ return {
       'css-lsp',
       'clangd',
       'pyright',
+      'typescript-language-server',
+      'vetur-vls vuels',
     },
   },
   config = function(_, opts)

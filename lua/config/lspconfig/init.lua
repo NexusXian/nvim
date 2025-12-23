@@ -2,38 +2,38 @@
 local cmp_nvim_lsp = require('cmp_nvim_lsp')  -- 保留补全能力依赖
 
 -- 初始化 lspkind（用于补全图标）
-local lspkind = require('lspkind')
-lspkind.init({
-  mode = 'symbol_text',
-  preset = 'codicons',
-  symbol_map = {
-    Text = "󰉿",
-    Method = "󰆧",
-    Function = "󰊕",
-    Constructor = "",
-    Field = "󰜢",
-    Variable = "󰀫",
-    Class = "󰠱",
-    Interface = "",
-    Module = "",
-    Property = "󰜢",
-    Unit = "󰑭",
-    Value = "󰎠",
-    Enum = "",
-    Keyword = "󰌋",
-    Snippet = "",
-    Color = "󰏘",
-    File = "󰈙",
-    Reference = "󰈇",
-    Folder = "󰉋",
-    EnumMember = "",
-    Constant = "󰏿",
-    Struct = "󰙅",
-    Event = "",
-    Operator = "󰆕",
-    TypeParameter = "",
-  },
-})
+-- local lspkind = require('lspkind')
+-- lspkind.init({
+--   mode = 'symbol_text',
+--   preset = 'codicons',
+--   symbol_map = {
+--     Text = "󰉿",
+--     Method = "󰆧",
+--     Function = "󰊕",
+--     Constructor = "",
+--     Field = "󰜢",
+--     Variable = "󰀫",
+--     Class = "󰠱",
+--     Interface = "",
+--     Module = "",
+--     Property = "󰜢",
+--     Unit = "󰑭",
+--     Value = "󰎠",
+--     Enum = "",
+--     Keyword = "󰌋",
+--     Snippet = "",
+--     Color = "󰏘",
+--     File = "󰈙",
+--     Reference = "󰈇",
+--     Folder = "󰉋",
+--     EnumMember = "",
+--     Constant = "󰏿",
+--     Struct = "󰙅",
+--     Event = "",
+--     Operator = "󰆕",
+--     TypeParameter = "",
+--   },
+-- })
 
 -- 获取 cmp 兼容的 capabilities（供所有 LSP 服务器复用）
 local capabilities = cmp_nvim_lsp.default_capabilities()
