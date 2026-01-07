@@ -14,7 +14,7 @@ return {
         shading_factor = 2,       -- 阴影强度（1-3）
         start_in_insert = true,   -- 打开终端时进入插入模式
         persist_size = true,      -- 记住终端大小
-        direction = "float",      -- 终端方向，可选 'vertical', 'horizontal', 'tab', 'float'
+        direction = "vertical",      -- 终端方向，可选 'vertical', 'horizontal', 'tab', 'float'
         float_opts = {
           border = "curved",      -- 边框样式，可选 'single', 'double', 'shadow', 'curved'
           winblend = 3,           -- 透明度（0 不透明，100 全透明）
@@ -35,9 +35,9 @@ return {
         elseif filetype == "java" then
           return "javac " .. filename .. " && java " .. filename_no_ext
         elseif filetype == "cpp" then
-          return "g++ -std=c++23 " .. filename .. " -o " .. filename_no_ext .. " && ./" .. filename_no_ext
+          return "clang++ -std=c++23 -lfmt " .. filename .. " -o " .. filename_no_ext .. " && ./" .. filename_no_ext
         elseif filetype == "c" then
-          return "gcc " .. filename .. " -o " .. filename_no_ext .. " && ./" .. filename_no_ext
+          return "clang " .. filename .. " -o " .. filename_no_ext .. " && ./" .. filename_no_ext
         elseif filetype == "python" then
           return "python3 " .. filename
         elseif filetype == "dart" then
@@ -46,6 +46,8 @@ return {
           return "node " .. filename
         elseif filetype == "rust" then
           return "cargo run" -- Rust 项目默认使用 Cargo
+        elseif filetype == "lua" then
+          return "lua " .. filename
         else
           return nil         -- 未支持的文件类型
         end

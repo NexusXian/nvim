@@ -1,19 +1,22 @@
 local lsp_common = require('config.lspconfig.init')
 
--- 配置 clangd（替代原 lspconfig.clangd.setup）
 vim.lsp.config('clangd', {
   capabilities = lsp_common.capabilities,
-  cmd = {
-    "clangd",
-    "--background-index",
-    "--all-scopes-completion",
-    "--clang-tidy",
-    "--completion-style=detailed",
-    "--header-insertion=never",
-  },
-  init_options = {
-    fallbackFlags = { "-std=c++23" }  -- 指定 C++23 标准
-  }
+  cmd = { "clangd" },
+
+  on_new_config = function(new_config, root_dir)
+    local ft = vim.bo.filetype
+
+    if ft == "c" then
+      new_config.init_options = {
+        fallbackFlags = { "-std=c23" }
+      }
+
+    elseif ft == "cpp" or ft == "cc" or ft == "cxx" then
+      new_config.init_options = {
+        fallbackFlags = { "-std=c++23" }
+      }
+    end
+  end,
 })
 
-vim.lsp.enable('clangd')
