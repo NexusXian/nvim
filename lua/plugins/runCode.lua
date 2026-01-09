@@ -14,7 +14,7 @@ return {
         shading_factor = 2,       -- 阴影强度（1-3）
         start_in_insert = true,   -- 打开终端时进入插入模式
         persist_size = true,      -- 记住终端大小
-        direction = "vertical",      -- 终端方向，可选 'vertical', 'horizontal', 'tab', 'float'
+        direction = "horizontal",      -- 终端方向，可选 'vertical', 'horizontal', 'tab', 'float'
         float_opts = {
           border = "curved",      -- 边框样式，可选 'single', 'double', 'shadow', 'curved'
           winblend = 3,           -- 透明度（0 不透明，100 全透明）
