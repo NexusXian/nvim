@@ -182,3 +182,6 @@ map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { desc = '搜索帮助文
 map('n', '<leader>fm', '<cmd>Telescope marks<cr>', { desc = '搜索标记' })
 map('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { desc = '搜索诊断信息' })
 map('n', '<leader>fc', '<cmd>Telescope commands<cr>', { desc = '搜索命令' })
+-- internal terminal
+map("n", "<C-\\>", ":ToggleTerm<CR>")
+
