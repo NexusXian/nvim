@@ -63,7 +63,7 @@ map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find Reference
 -- Code hints and information
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "Hover Documentation" })
 map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Signature Documentation" })
-
+ 
 -- Code actions
 map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code Action" })
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename Symbol" })
@@ -184,4 +184,8 @@ map('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { desc = '搜索诊断�
 map('n', '<leader>fc', '<cmd>Telescope commands<cr>', { desc = '搜索命令' })
 -- internal terminal
 map("n", "<C-\\>", ":ToggleTerm<CR>")
-
+-- resize the windows size
+map("n", "<M-Up>", "<C-w>+", { noremap = true, silent = true, desc = "Increase window height" })
+map("n", "<M-Down>", "<C-w>-", { noremap = true, silent = true, desc = "Decrease window height" })
+map("n", "<M-Right>", "<C-w>>", { noremap = true, silent = true, desc = "Increase window width" })
+map("n", "<M-Left>", "<C-w><", { noremap = true, silent = true, desc = "Decrease window width" })

@@ -6,7 +6,7 @@ return {
       local Terminal = require("toggleterm.terminal").Terminal
 
       require("toggleterm").setup({
-        size = 20,                -- 终端窗口的默认大小
+        size = 7,                -- 终端窗口的默认大小
         open_mapping = [[<ctrl>-t]], -- 打开/关闭终端的快捷键
         hide_numbers = true,      -- 隐藏行号
         shade_filetypes = {},
