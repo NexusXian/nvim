@@ -7,6 +7,7 @@ return {
       'eslint-lsp',
       'html-lsp',
       'css-lsp',
+      'c3-lsp',
       'clangd',
       'pyright',
       'typescript-language-server',
