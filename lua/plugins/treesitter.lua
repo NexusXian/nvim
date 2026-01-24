@@ -4,7 +4,7 @@ return {
   opts = {
     ensure_installed = {
       "c", "cpp", "go", "gomod", "lua", "html", "css", "javascript", "java", "dart", "python",
-      "rust", "typescript", "tsx", "graphql", "vue", "yaml", "json", "markdown", "toml"
+      "rust", "typescript", "tsx", "graphql", "vue", "yaml", "json", "markdown", "toml","zig"
     },
     auto_install = true,
     highlight = {

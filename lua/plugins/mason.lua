@@ -10,6 +10,7 @@ return {
       'c3-lsp',
       'clangd',
       'pyright',
+      "zls",
       'typescript-language-server',
       'vetur-vls vuels',
     },
