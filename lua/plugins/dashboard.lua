@@ -21,34 +21,11 @@ return {
         },
         center = {
           {
-            icon = '  ',
-            desc = 'Find File           ',
-            desc_hl = 'String',
-            key = 'f',
-            keymap = 'f',
-            key_hl = 'Number',
-            action = 'Telescope find_files'
-          },
-          {
-            icon = '  ',
-            desc = 'Find Recent Files   ',
-            key = 'r',
-            keymap = 'r',
-            action = 'Telescope oldfiles'
-          },
-          {
             icon = '󰈙  ',
             desc = 'New File            ',
             key = 'n',
             keymap = 'n',
             action = 'enew'
-          },
-          {
-            icon = '󰒲  ',
-            desc = 'Lazy            ',
-            key = 'l',
-            keymap = 'l',
-            action = 'Lazy'
           },
           {
             icon = '  ',
@@ -66,7 +43,7 @@ return {
           },
         },
         footer = function()
-          local stats = require('lazy').stats()
+         local stats = require('lazy').stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           return { "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
         end,
