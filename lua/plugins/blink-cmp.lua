@@ -47,8 +47,8 @@ return {
       -- 列表显示设置
       list = {
         selection = {
-          preselect = true,  -- 默认选中第一项，解决回车没反应的问题
-          auto_insert = true -- 输入时自动预览
+          preselect = false,  -- 默认选中第一项，解决回车没反应的问题
+          auto_insert = false-- 输入时自动预览
         }
       },
 
