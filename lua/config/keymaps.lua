@@ -17,27 +17,6 @@ map('n', 'Y', '"+yy', { noremap = true, silent = true, desc = "Yank line to syst
 -- Use uppercase Y to copy to system clipboard in visual mode
 map('v', 'Y', '"+y', { noremap = true, silent = true, desc = "Yank selection to system clipboard" })
 
-local term_bufnr = nil
--- Map Ctrl + / to toggle terminal in normal mode
-map('n', '<C-/>', function()
-  -- If terminal buffer exists and is visible, close it
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    if buf == term_bufnr then
-      vim.api.nvim_win_close(win, true)
-      return
-    end
-  end
-
-  -- Otherwise create a new terminal window with size 10
-  vim.cmd('belowright 10split | terminal')
-  term_bufnr = vim.api.nvim_get_current_buf()
-  vim.cmd('startinsert')
-end, { noremap = true, silent = true, desc = "Toggle terminal" })
-
--- Map <Esc> to exit terminal mode
-vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, desc = "Exit terminal mode" })
-
 -- Plugin key mappings
 -- nvim-tree file explorer
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File Explorer (nvim-tree)" })
@@ -189,3 +168,7 @@ map("n", "<M-Up>", "<C-w>+", { noremap = true, silent = true, desc = "Increase w
 map("n", "<M-Down>", "<C-w>-", { noremap = true, silent = true, desc = "Decrease window height" })
 map("n", "<M-Right>", "<C-w>>", { noremap = true, silent = true, desc = "Increase window width" })
 map("n", "<M-Left>", "<C-w><", { noremap = true, silent = true, desc = "Decrease window width" })
+
+
+-- open claude code
+map('n', '<leader>cl', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
