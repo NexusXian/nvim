@@ -177,6 +177,9 @@ map('n', '<leader>cl', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
 --go
 map('n', '<leader>gi', '<cmd>GoImports<CR>', { desc = 'Import go package' })
 map('n', '<leader>gmt', '<cmd>GoModTidy<CR>', { desc = 'Tidy go.mod' })
+--markdown
+map('n', '<leader>mk', '<cmd>MarkdownPreview<CR>', { desc = 'preview markdown in browser' })
+map('n', '<leader>mks', '<cmd>MarkdownPreviewStop<CR>', { desc = 'stop preview markdown' })
 
 
 
