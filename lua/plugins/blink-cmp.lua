@@ -96,7 +96,7 @@ return {
 
     -- 补全来源列表
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'lsp', 'path', 'snippets', 'buffer'},
     },
   },
 

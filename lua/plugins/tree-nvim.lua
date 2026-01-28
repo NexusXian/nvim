@@ -7,7 +7,7 @@ return {
       require("nvim-tree").setup({
         actions = {
           open_file = {
-            quit_on_open = true, -- 打开文件后自动关闭 nvim-tree
+            quit_on_open = false, -- 打开文件后自动关闭 nvim-tree
           },
         },
         update_focused_file = {
