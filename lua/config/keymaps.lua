@@ -172,3 +172,12 @@ map("n", "<M-Left>", "<C-w><", { noremap = true, silent = true, desc = "Decrease
 
 -- open claude code
 map('n', '<leader>cl', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
+
+
+--go
+map('n', '<leader>gi', '<cmd>GoImports<CR>', { desc = 'Import go package' })
+map('n', '<leader>gmt', '<cmd>GoModTidy<CR>', { desc = 'Tidy go.mod' })
+
+
+
+

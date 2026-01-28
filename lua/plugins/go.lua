@@ -16,7 +16,7 @@ return {
       -- 格式化设置（修正：注释说明和工具名对应）
       gofmt = 'gofmt',       -- 使用 gofmt 作为格式化工具
       goimports = 'goimports', -- 用 goimports 整理导入（而非 gofmt）
-      lsp_fmt_async = true,  -- 异步格式化，提升体验
+      lsp_fmt_async =false,  -- 异步格式化，提升体验
 
       -- 自动格式化
       fmt_on_save = true, -- 保存时自动格式化
