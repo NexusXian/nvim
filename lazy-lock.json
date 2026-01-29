@@ -45,7 +45,7 @@
   "tcomment_vim": { "branch": "master", "commit": "48ab639a461d9b8344f7fee06cb69b4374863b13" },
   "telescope.nvim": { "branch": "master", "commit": "a9bb091895cfe5088c448e6a7b16fc36a7b7acf7" },
   "toggleterm.nvim": { "branch": "main", "commit": "50ea089fc548917cc3cc16b46a8211833b9e3c7c" },
-  "tsumugi": { "branch": "master", "commit": "f5d88efd20c88c58b82f8b4c7b56d6ad79024250" },
+  "tsumugi": { "branch": "master", "commit": "5a0bebb5b7ad8f446b0fd4b89945843fff7fceb0" },
   "vim-dadbod": { "branch": "master", "commit": "6d1d41da4873a445c5605f2005ad2c68c99d8770" },
   "vim-dadbod-completion": { "branch": "master", "commit": "a8dac0b3cf6132c80dc9b18bef36d4cf7a9e1fe6" },
   "vim-dadbod-ui": { "branch": "master", "commit": "48c4f271da13d380592f4907e2d1d5558044e4e5" },
