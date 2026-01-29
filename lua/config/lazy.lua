@@ -24,33 +24,28 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- 加载 lazy.nvim 并启用自动更新相关配置
+-- 加载 lazy.nvim 配置
 require("lazy").setup({
   spec = {
-    { import = "plugins" },  -- 你的插件目录
+    { import = "plugins" }, 
   },
   install = {
     colorscheme = { "habamax" },
   },
+  -- 1. 关闭自动检查更新
   checker = {
-    enabled = true,        -- 启用自动检查更新
-    notify = false,        -- 是否显示通知
-    frequency = 3600 * 24, -- 每 24 小时检查一次（单位秒）
+    enabled = false,       -- 改为 false，不再去后台偷偷看有没有新版本
   },
+  -- 2. 关闭配置变更通知
   change_detection = {
-    enabled = true,        -- 插件文件发生变化时检测
-    notify = true,         -- 变化时通知
+    enabled = true,        -- 依然允许热加载配置
+    notify = false,        -- 但不再弹出“Config change detected”的提示
   },
-  update = {
-    concurrency = 5,       -- 并发更新任务数
-    skip_prompts = true,   -- 自动跳过提示
+  -- 3. 其他 UI 设置（可选）
+  ui = {
+    border = "rounded",
   },
 })
 
--- 启动 Neovim 时自动更新插件（可选）
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    require("lazy").update({ show = false})  -- 不显示更新界面
-  end,
-})
-
+-- 4. 彻底删除原有的 VimEnter 自动更新 autocmd
+-- 已经直接删除了 require("lazy").update 的那段代码
