@@ -2,6 +2,7 @@ return {
   {
     "supermaven-inc/supermaven-nvim",
     config = function()
+      -- 在 init.lua 中加载 supermaven 插件
       require("supermaven-nvim").setup({
         keymaps = {
           accept_suggestion = "<C-CR>", -- 添加接受建议的快捷键
@@ -10,7 +11,7 @@ return {
           accept_line = "<C-l>",        -- 添加接受单行建议的快捷键
         },
         color = {
-          suggestion_color = "#A89984",
+          suggestion_color = "#8F8A83",
           cterm = 244,
         },
         log_level = "info",                -- 设置为 "off" 可禁用日志
