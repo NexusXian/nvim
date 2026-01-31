@@ -1,20 +1,38 @@
-local M = {}
+-- 公共配置：初始化 lspkind、capabilities、通用函数
+local cmp_nvim_lsp = require('cmp_nvim_lsp')  -- 保留补全能力依赖
+-- 获取 cmp 兼容的 capabilities（供所有 LSP 服务器复用）
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- 获取 blink 兼容的 capabilities
--- 注意：这里不再需要引用 cmp_nvim_lsp
-M.capabilities = require("blink.cmp").get_lsp_capabilities()
-
--- 通用：保存时自动格式化 (逻辑保持不变)
-M.format_on_save = function(client, bufnr)
-  if client.supports_method("textDocument/formatting") then
+-- 通用：保存时自动格式化
+local format_on_save = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
       callback = function()
-        -- 提示：blink 也可以通过配置实现格式化，但这里保留你的自定义逻辑
-        vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 2000 })
+                vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 2000 })
       end,
     })
   end
 end
+-- 自定义补全项显示格式
+local custom_format = function(entry, vim_item)
+  -- 删除手动 icon，完全交给 lspkind 处理
+  vim_item = lspkind.cmp_format()(entry, vim_item)
 
-return M
+  -- 添加来源标签（menu）
+  vim_item.menu = string.format(' [%s]', ({
+    nvim_lsp = 'LSP',
+    luasnip = 'Snippet',
+    buffer = 'Buffer',
+    path = 'Path',
+    copilot = 'AI',
+  })[entry.source.name] or '')
+
+  return vim_item
+end
+
+return {
+  capabilities = capabilities,
+  format_on_save = format_on_save,
+  format = custom_format,
+}
