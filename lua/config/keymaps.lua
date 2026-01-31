@@ -24,6 +24,30 @@ map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File Explorer 
 -- BufferLine tab navigation
 map("n", "H", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
 map("n", "L", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
+-- 关闭当前 buffer（不关窗口）
+map("n", "<leader>q", function()
+  vim.cmd("bdelete")
+end, { desc = "Close current buffer" })
+
+-- 关闭其他 buffer
+map("n", "<leader>bo", function()
+  vim.cmd("BufferLineCloseOthers")
+end, { desc = "Close other buffers" })
+
+-- 关闭右侧 buffer
+map("n", "<leader>br", function()
+  vim.cmd("BufferLineCloseRight")
+end, { desc = "Close right buffers" })
+
+-- 点选关闭 buffer（会出现字母提示）
+map("n", "<leader>bp", function()
+  vim.cmd("BufferLinePickClose")
+end, { desc = "Pick buffer to close" })
+
+-- 点选打开buffer）
+map("n", "<leader>bs", function()
+  vim.cmd("BufferLinePick")
+end, { desc = "Pick buffer to open" })
 
 -- Window navigation with Ctrl + arrow keys
 map("n", "<C-h>", "<C-w>h", { noremap = true, silent = true, desc = "Navigate left window" })
@@ -42,7 +66,7 @@ map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find Reference
 -- Code hints and information
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "Hover Documentation" })
 map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Signature Documentation" })
- 
+
 -- Code actions
 map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code Action" })
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename Symbol" })
@@ -180,7 +204,3 @@ map('n', '<leader>gmt', '<cmd>GoModTidy<CR>', { desc = 'Tidy go.mod' })
 --markdown
 map('n', '<leader>mk', '<cmd>MarkdownPreview<CR>', { desc = 'preview markdown in browser' })
 map('n', '<leader>mks', '<cmd>MarkdownPreviewStop<CR>', { desc = 'stop preview markdown' })
-
-
-
-
