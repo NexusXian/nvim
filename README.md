@@ -95,7 +95,7 @@ nvim
 | `telescope.nvim` | 模糊搜索、文件查找 |
 | `toggleterm.nvim` | 内置终端窗口 |
 | `rainbow-delimiters.nvim` | 彩虹括号显示 |
-| `ranger.nvim` | 文件管理器（Ranger）集成 |
+| `yazi.nvim` | 文件管理器（yazi）集成 |
 | `supermaven.nvim` | AI 补全助手（Supermaven） |
 | `vim-surround` | 修改/包裹括号、引号等 |
 | `vim-visual-multi` | 多光标操作 |
@@ -103,7 +103,6 @@ nvim
 | `wilder.nvim` | 增强命令行 |
 | `wildfire.nvim` | 快捷选择语法范围 |
 | `nvim-tree.lua` | 文件浏览器 |
-| `ranger-nvim` | Ranger 文件管理器集成 |
 
 ---
 
@@ -136,7 +135,7 @@ nvim
 | n | `<C-j>` | 导航到下方窗口 | 原生窗口管理 |
 | n | `<C-k>` | 导航到上方窗口 | 原生窗口管理 |
 | n | `<C-l>` | 导航到右侧窗口 | 原生窗口管理 |
-| n | `<Leader>r` | 打开Ranger文件管理器 | `ranger-nvim` |
+| n | `<Leader>-` | 打开yazi文件管理器 | `yazi.nvim` |
 
 ### ⚙️ LSP 相关操作
 
@@ -170,7 +169,8 @@ nvim
 |------|--------|------|----------|
 | n | `<Leader>a` | 打开CodeCompanion AI聊天窗口 | `codecompanion` |
 | i | `<C-Return>` | 应用supermaven代码补全 | `supermaven` |
-| n | `ga` | 应用CodeCompanion代码修改 | `codecompanion` |
+| n | `<Leader>cl` | 打开Claude Code | `claude Code` |
+
 
 
 ### 🧪 竞赛编程（Competitive Programming）
@@ -241,6 +241,7 @@ nvim
 | 模式 | 快捷键 | 说明 | 插件来源 |
 |------|--------|------|----------|
 | n | `<Leader>lg` | 打开lazygit | `lazygit.nvim` |
+| n | `<Leader>t` |  翻译当前光标下的单词 | `kd.nvim` |
 
 
 ## 📝 补充说明
