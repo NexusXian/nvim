@@ -23,7 +23,7 @@
 ### 1. 克隆配置
 
 ```bash
-git clone https://github.com/NexusXian/nvim.git ~/.config/nvim
+git clone -b stable https://github.com/NexusXian/nvim.git ~/.config/nvim
 ```
 
 ### 2. 安装 Neovim 最新版（建议 v0.9+）
