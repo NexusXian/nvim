@@ -7,12 +7,10 @@ return {
       'eslint-lsp',
       'html-lsp',
       'css-lsp',
-      'c3-lsp',
       'clangd',
       'pyright',
       "zls",
       'typescript-language-server',
-      'vetur-vls vuels',
     },
   },
   config = function(_, opts)
