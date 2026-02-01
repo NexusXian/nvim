@@ -107,8 +107,12 @@ map('n', '<leader>cp', ':CompetiTest receive problem<CR>', {
   desc = "Receive problem"
 })
 
--- FlutterTree
+-- Flutter
 map('n', '<leader>fo', '<cmd>FlutterOutlineToggle<CR>', { desc = 'Toggle Flutter Outline' })
+map('n', '<leader>fl', '<cmd>FlutterReload<CR>', { desc = 'Flutter Reload' })
+map('n', '<leader>fq', '<cmd>FlutterQuit<CR>', { desc = 'Quit Flutter' })
+map('n', '<leader>fr', '<cmd>FlutterRun<CR>', { desc = 'Run Flutter' })
+map('n', '<leader>fe', '<cmd>FlutterEmulators<CR>', { desc = 'Select Flutter Emulator' })
 
 -- nvim-dap debugging
 -- Basic debugging control

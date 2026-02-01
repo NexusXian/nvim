@@ -96,22 +96,6 @@ return {
           end
         },
       }),
-      -- formatting = {
-      --   format = lspkind.cmp_format({
-      --     -- mode = 'symbol_text',         -- ✅ 保留图标
-      --     maxwidth = 50,
-      --     ellipsis_char = '...',
-      --     fields = { "kind", "abbr", "menu" },
-      --
-      --     before = function(entry, vim_item)
-      --       -- 可选：高亮 copilot 项（图标不变）
-      --       if entry.source.name == 'copilot' then
-      --         vim_item.kind_hl_group = 'CmpItemKindCopilot'
-      --       end
-      --       return vim_item
-      --     end,
-      --   }),
-      -- },
       completion = {
         completeopt = 'menu,menuone,noselect',
         keyword_length = 1,
