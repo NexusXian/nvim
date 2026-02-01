@@ -85,15 +85,6 @@ map("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Ope
 -- AI coding assistant
 map("n", "<leader>a", "<cmd>CodeCompanionChat<CR>", { desc = "Open Code Companion Chat" })
 
--- File manager
-map("n", "<leader>r", function()
-  require("ranger-nvim").open(true)
-end, {
-  noremap = true,
-  silent = true,
-  desc = "Open file manager (Ranger)",
-})
-
 -- CompetiTest
 map('n', '<leader>cr', ':CompetiTest run<CR>', {
   noremap = true,
