@@ -24,21 +24,30 @@ return {
             icon = '󰈙  ',
             desc = 'New File            ',
             key = 'n',
-            keymap = 'n',
             action = 'enew'
+          },
+          {
+            icon = '  ',
+            desc = 'Find File',
+            key = 'f',
+            action = 'Telescope find_files'
+          },
+          {
+            icon = '  ',
+            desc = 'Recent Files',
+            key = 'r',
+            action = 'Telescope oldfiles'
           },
           {
             icon = '  ',
             desc = 'Config              ',
             key = 'c',
-            keymap = 'c',
             action = 'edit ~/.config/nvim/init.lua'
           },
           {
             icon = '󰿅  ',
             desc = 'Exit Neovim         ',
             key = 'q',
-            keymap = 'q',
             action = 'qa'
           },
         },
