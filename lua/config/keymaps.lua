@@ -199,3 +199,11 @@ map('n', '<leader>gmt', '<cmd>GoModTidy<CR>', { desc = 'Tidy go.mod' })
 --markdown
 map('n', '<leader>mk', '<cmd>MarkdownPreview<CR>', { desc = 'preview markdown in browser' })
 map('n', '<leader>mks', '<cmd>MarkdownPreviewStop<CR>', { desc = 'stop preview markdown' })
+
+
+
+--hop
+--
+map("n", "<leader>ww", ":HopWord<CR>", {silent=true})
+
+map("n", "<leader>ll", ":HopLine<CR>", {silent=true})
