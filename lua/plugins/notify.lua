@@ -28,7 +28,7 @@ return {
       stages = 'fade_in_slide_out',
       
       -- 超时时间（毫秒）
-      timeout = 1000,
+      timeout = 500,
       
       -- 背景颜色（对于透明主题很重要）
       background_colour = '#1e1e2e',
