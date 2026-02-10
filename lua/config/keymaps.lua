@@ -175,6 +175,19 @@ map('n', '<leader>fG', '<cmd>Telescope live_grep grep_open_files=true<cr>', { de
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { desc = '搜索缓冲区' })
 map('n', '<leader>fB', '<cmd>Telescope buffers show_all_buffers=true<cr>', { desc = '搜索所有缓冲区' })
 
+
+-- 搜索当前文件的函数 / 方法列表
+map('n', '<leader>fs', function()
+  require('telescope.builtin').lsp_document_symbols({
+    symbols = { 'function', 'method', 'constructor' },
+  })
+end, { desc = '搜索当前文件的函数列表' })
+
+-- 搜索当前文件的全部符号
+map('n', '<leader>fS', '<cmd>Telescope lsp_document_symbols<cr>', {
+  desc = '搜索当前文件的全部符号',
+})
+
 -- 特定场景搜索
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { desc = '搜索帮助文档' })
 map('n', '<leader>fm', '<cmd>Telescope marks<cr>', { desc = '搜索标记' })
