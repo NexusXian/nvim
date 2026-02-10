@@ -177,14 +177,14 @@ map('n', '<leader>fB', '<cmd>Telescope buffers show_all_buffers=true<cr>', { des
 
 
 -- 搜索当前文件的函数 / 方法列表
-map('n', '<leader>fs', function()
+map('n', '<leader>o', function()
   require('telescope.builtin').lsp_document_symbols({
     symbols = { 'function', 'method', 'constructor' },
   })
 end, { desc = '搜索当前文件的函数列表' })
 
 -- 搜索当前文件的全部符号
-map('n', '<leader>fS', '<cmd>Telescope lsp_document_symbols<cr>', {
+map('n', '<leader>O', '<cmd>Telescope lsp_document_symbols<cr>', {
   desc = '搜索当前文件的全部符号',
 })
 
