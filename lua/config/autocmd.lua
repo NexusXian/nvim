@@ -1,5 +1,14 @@
--- 创建一个自动命令组（可选，但推荐）
+-- 创建一个自动命令组
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+
+-- nvim .的时候，如果只有一个参数，就打开Telescope find_files
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.argc() == 1 and vim.fn.argv(0) == "." then
+      vim.cmd("Telescope find_files")
+    end
+  end,
+})
 
 -- 创建自动命令
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -12,3 +21,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     })
   end,
 })
+
