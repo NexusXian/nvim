@@ -166,6 +166,7 @@ map('v', '<leader>cc', ":'<,'>TComment<CR>", { desc = '取消/注释选中区域
 
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Find Files (包括隐藏文件)' })
 map('n', '<leader>fF', '<cmd>Telescope find_files no_ignore=true<cr>', { desc = 'Find Files (包括忽略文件)' })
+map('n', '<leader>F', '<cmd>Telescope oldfiles<cr>', { desc = 'Find Files (包括忽略文件)' })
 
 -- 内容搜索
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { desc = '项目内内容搜索' })
@@ -201,10 +202,8 @@ map("n", "<M-Down>", "<C-w>-", { noremap = true, silent = true, desc = "Decrease
 map("n", "<M-Right>", "<C-w>>", { noremap = true, silent = true, desc = "Increase window width" })
 map("n", "<M-Left>", "<C-w><", { noremap = true, silent = true, desc = "Decrease window width" })
 
-
 -- open claude code
 map('n', '<leader>cl', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
-
 
 --go
 map('n', '<leader>gi', '<cmd>GoImports<CR>', { desc = 'Import go package' })
@@ -213,19 +212,14 @@ map('n', '<leader>gmt', '<cmd>GoModTidy<CR>', { desc = 'Tidy go.mod' })
 map('n', '<leader>mk', '<cmd>MarkdownPreview<CR>', { desc = 'preview markdown in browser' })
 map('n', '<leader>mks', '<cmd>MarkdownPreviewStop<CR>', { desc = 'stop preview markdown' })
 
-
-
 --hop
 map("n", "<leader>ww", ":HopWord<CR>", { silent = true })
 
 map("n", "<leader>ll", ":HopLine<CR>", { silent = true })
-
-
-
 
 --gi sine
 map("n", "<leader>g-", ":Gitsigns prev_hunk<CR>", { noremap = true, silent = true })
 map("n", "<leader>g=", ":Gitsigns next_hunk<CR>", { noremap = true, silent = true })
 map("n", "<leader>gb", ":Gitsigns blame_line<CR>", { noremap = true, silent = true })
 map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true })
-map("n", "H", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true })
+map("n", "<leader>H", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true })

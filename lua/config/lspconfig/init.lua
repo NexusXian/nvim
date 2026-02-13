@@ -55,7 +55,7 @@ vim.diagnostic.config({
     spacing = 2,         -- 与代码的间距
     source = "if_many",  -- 多来源才显示
   },
-  signs = true,          -- 左侧符号列
+  signs = false,          -- 左侧符号列
   underline = true,      -- 波浪线
   update_in_insert = false, -- 插入模式不刷新（推荐）
   severity_sort = true,
