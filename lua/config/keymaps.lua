@@ -7,7 +7,7 @@ local api = require("dropbar.api")
 map('i', 'jk', '<Esc>', { noremap = true, silent = true, desc = "Exit insert mode" })
 
 -- Map Ctrl + a to select all in normal mode
-map('n', '<C-a>', function()
+map('n', '<leader>sa', function()
   vim.cmd('normal! ggVG')
 end, { noremap = true, silent = true, desc = "Select all text" })
 
@@ -216,7 +216,16 @@ map('n', '<leader>mks', '<cmd>MarkdownPreviewStop<CR>', { desc = 'stop preview m
 
 
 --hop
---
-map("n", "<leader>ww", ":HopWord<CR>", {silent=true})
+map("n", "<leader>ww", ":HopWord<CR>", { silent = true })
 
-map("n", "<leader>ll", ":HopLine<CR>", {silent=true})
+map("n", "<leader>ll", ":HopLine<CR>", { silent = true })
+
+
+
+
+--gi sine
+map("n", "<leader>g-", ":Gitsigns prev_hunk<CR>", { noremap = true, silent = true })
+map("n", "<leader>g=", ":Gitsigns next_hunk<CR>", { noremap = true, silent = true })
+map("n", "<leader>gb", ":Gitsigns blame_line<CR>", { noremap = true, silent = true })
+map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true })
+map("n", "H", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true })
