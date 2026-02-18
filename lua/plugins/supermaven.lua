@@ -5,7 +5,7 @@ return {
       -- 在 init.lua 中加载 supermaven 插件
       require("supermaven-nvim").setup({
         keymaps = {
-          accept_suggestion = "<Tab>", -- 添加接受建议的快捷键
+          accept_suggestion = "<C-CR>", -- 添加接受建议的快捷键
           clear_suggestion = "<C-]>",   -- 添加清除建议的快捷键
           accept_word = "<C-j>",        --# 添加接受单词建议的快捷键
           accept_line = "<C-l>",        -- 添加接受单行建议的快捷键
