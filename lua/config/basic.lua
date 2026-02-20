@@ -111,7 +111,6 @@ vim.o.undodir = vim.fn.stdpath("data") .. "/undo"
 --保存缓冲区确认
 vim.o.confirm = true
 
-
 -- neovide
 if vim.g.neovide then
   vim.keymap.set("n", "<C-=>", function()

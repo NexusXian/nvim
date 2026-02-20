@@ -1,21 +1,46 @@
 local preview_stack_trace_go = function()
   local line = vim.api.nvim_get_current_line()
-  local filePath, lineNumber = line:match("(.+):(%d+)")
-  if filePath and lineNumber then
-    vim.cmd(":wincmd k")
-    vim.cmd("e " .. filePath)
-    vim.api.nvim_win_set_cursor(0, { tonumber(lineNumber), 0 })
-    vim.cmd(":wincmd j")
+
+  local patterns = {
+    -- file:line:col
+    { "(.+%.go):(%d+):(%d+)", true },
+
+    -- file:line
+    { "(.+%.go):(%d+)", false },
+
+    -- panic stack: \t/path/file.go:12
+    { "%s+(.+%.go):(%d+)", false },
+  }
+
+  local filePath, lineNumber
+
+  for _, p in ipairs(patterns) do
+    local path, line, col = line:match(p[1])
+    if path and line then
+      filePath = path
+      lineNumber = tonumber(line)
+      break
+    end
   end
 
-  print(filePath, lineNumber)
+  if not filePath or not lineNumber then
+    vim.notify("未识别 Go 错误行", vim.log.levels.WARN)
+    return
+  end
+
+  -- 切到上窗口打开文件（符合你原来的设计）
+  vim.cmd("wincmd k")
+  vim.cmd("edit " .. vim.fn.fnameescape(filePath))
+  vim.api.nvim_win_set_cursor(0, { lineNumber, 0 })
+  vim.cmd("normal! zz")
+  vim.cmd("wincmd j")
+
 end
 
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "term://*",
-  callback = function()
-    vim.keymap.set("n", "<leader>gt", preview_stack_trace_go, { silent = true, noremap = true, buffer = true })
-  end
+vim.keymap.set("n", "<leader>gt", preview_stack_trace_go, {
+  silent = true,
+  noremap = true,
+  desc = "Go stacktrace preview",
 })
 
 
