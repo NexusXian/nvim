@@ -217,9 +217,15 @@ map("n", "<leader>ww", ":HopWord<CR>", { silent = true })
 
 map("n", "<leader>ll", ":HopLine<CR>", { silent = true })
 
---gi sine
+-- git signs
 map("n", "<leader>g-", ":Gitsigns prev_hunk<CR>", { noremap = true, silent = true })
 map("n", "<leader>g=", ":Gitsigns next_hunk<CR>", { noremap = true, silent = true })
 map("n", "<leader>gb", ":Gitsigns blame_line<CR>", { noremap = true, silent = true })
 map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true })
 map("n", "<leader>H", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true })
+
+
+
+-- slipe the windows
+map("n", "<leader>vs", "<cmd>vsplit<CR>", { noremap = true, silent = true })
+map("n", "<leader>sw", "<cmd>split<CR>", { noremap = true, silent = true })
