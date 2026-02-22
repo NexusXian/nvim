@@ -1,14 +1,13 @@
 local preview_stack_trace_go = function()
   local line = vim.api.nvim_get_current_line()
 
-  -- 保存当前 terminal 窗口和光标位置
   local origin_win = vim.api.nvim_get_current_win()
   local origin_cursor = vim.api.nvim_win_get_cursor(origin_win)
 
   local patterns = {
-    { "(/.-%.go):(%d+):(%d+)", true },
-    { "(/.-%.go):(%d+)%s+%+0x%x+", false },
-    { "(/.-%.go):(%d+)", false },
+    { "([%w%./_-]+%.go):(%d+):(%d+)", true },
+    { "([%w%./_-]+%.go):(%d+)%s+%+0x%x+", false },
+    { "([%w%./_-]+%.go):(%d+)", false },
   }
 
   local filePath, lineNumber, colNumber
@@ -19,6 +18,9 @@ local preview_stack_trace_go = function()
       path = path:gsub("\27%[[0-9;]*m", "")
       path = path:gsub("%c", "")
 
+      -- 转成绝对路径（关键）
+      path = vim.fn.fnamemodify(path, ":p")
+
       filePath = path
       lineNumber = tonumber(lineNum)
       colNumber = tonumber(colNum) or 1
@@ -27,16 +29,15 @@ local preview_stack_trace_go = function()
   end
 
   if not filePath or not lineNumber then
-    vim.notify("can not recognize the error line", vim.log.levels.WARN)
+    vim.notify("未识别 Go 错误行", vim.log.levels.WARN)
     return
   end
 
   if vim.fn.filereadable(filePath) == 0 then
-    vim.notify("the file is not exsit: " .. filePath, vim.log.levels.ERROR)
+    vim.notify("文件不存在: " .. filePath, vim.log.levels.ERROR)
     return
   end
 
-  -- 切到上窗口
   vim.cmd("wincmd k")
   vim.cmd("edit " .. vim.fn.fnameescape(filePath))
 
@@ -51,11 +52,8 @@ local preview_stack_trace_go = function()
       vim.cmd("normal! zz")
     end
 
-    -- 回到原 terminal 窗口
     if vim.api.nvim_win_is_valid(origin_win) then
       vim.api.nvim_set_current_win(origin_win)
-
-      -- 恢复原光标
       pcall(vim.api.nvim_win_set_cursor, origin_win, origin_cursor)
     end
   end)
@@ -66,7 +64,6 @@ vim.keymap.set("n", "<leader>gt", preview_stack_trace_go, {
   noremap = true,
   desc = "Go stacktrace preview",
 })
-
 
 local preview_stack_trace_flutter = function()
   local line = vim.api.nvim_get_current_line()
