@@ -157,43 +157,38 @@ map('n', '<Leader>;', api.pick, { desc = "Dropbar: Pick element" })
 map('n', '[c', api.goto_context_start, { desc = "Dropbar: Go to context start" })
 map('n', ']c', api.select_next_context, { desc = "Dropbar: Select next context" })
 
--- 普通模式：<leader>cc 注释当前行，<leader>cu 取消注释
-map('n', '<leader>cc', ':TComment<CR>', { desc = '取消/注释当前行' })
+-- Normal mode: <leader>cc comment current line, <leader>cu uncomment
+map('n', '<leader>cc', ':TComment<CR>', { desc = 'Toggle comment/uncomment current line' })
 
--- 可视模式：<leader>cc 注释选中区域，<leader>cu 取消选中区域注释
-map('v', '<leader>cc', ":'<,'>TComment<CR>", { desc = '取消/注释选中区域' })
+-- Visual mode: <leader>cc comment selected area, <leader>cu uncomment selected area
+map('v', '<leader>cc', " :'<' ,' '>TComment<CR>", { desc = 'Toggle comment/uncomment selected area' })
 
 
-map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Find Files (包括隐藏文件)' })
-map('n', '<leader>fF', '<cmd>Telescope find_files no_ignore=true<cr>', { desc = 'Find Files (包括忽略文件)' })
-map('n', '<leader>F', '<cmd>Telescope oldfiles<cr>', { desc = 'Find Files (包括忽略文件)' })
+map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Find Files (including hidden files)' })
+map('n', '<leader>fF', '<cmd>Telescope find_files no_ignore=true<cr>', { desc = 'Find Files (including ignored files)' })
+map('n', '<leader>F', '<cmd>Telescope oldfiles<cr>', { desc = 'Find Files (including ignored files)' })
 
--- 内容搜索
-map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { desc = '项目内内容搜索' })
-map('n', '<leader>fG', '<cmd>Telescope live_grep grep_open_files=true<cr>', { desc = '仅搜索打开的文件内容' })
-
--- 缓冲区相关
-map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { desc = '搜索缓冲区' })
-map('n', '<leader>fB', '<cmd>Telescope buffers show_all_buffers=true<cr>', { desc = '搜索所有缓冲区' })
-
+-- Buffer related
+map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { desc = 'Search buffers' })
+map('n', '<leader>fB', '<cmd>Telescope buffers show_all_buffers=true<cr>', { desc = 'Search all buffers' })
 
 -- 搜索当前文件的函数 / 方法列表
 map('n', '<leader>o', function()
   require('telescope.builtin').lsp_document_symbols({
     symbols = { 'function', 'method', 'constructor' },
   })
-end, { desc = '搜索当前文件的函数列表' })
+end, { desc = 'Search functions in current file' })
 
--- 搜索当前文件的全部符号
+-- Search all symbols in current file
 map('n', '<leader>O', '<cmd>Telescope lsp_document_symbols<cr>', {
-  desc = '搜索当前文件的全部符号',
+  desc = 'Search all symbols in current file',
 })
 
 -- 特定场景搜索
-map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { desc = '搜索帮助文档' })
-map('n', '<leader>fm', '<cmd>Telescope marks<cr>', { desc = '搜索标记' })
-map('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { desc = '搜索诊断信息' })
-map('n', '<leader>fc', '<cmd>Telescope commands<cr>', { desc = '搜索命令' })
+map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { desc = 'Search help documentation' })
+map('n', '<leader>fm', '<cmd>Telescope marks<cr>', { desc = 'Search marks' })
+map('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { desc = 'Search diagnostic information' })
+map('n', '<leader>fc', '<cmd>Telescope commands<cr>', { desc = 'Search commands' })
 -- internal terminal
 map("n", "<C-t>", ":ToggleTerm<CR>")
 -- resize the windows size

@@ -27,12 +27,12 @@ local preview_stack_trace_go = function()
   end
 
   if not filePath or not lineNumber then
-    vim.notify("未识别 Go 错误行", vim.log.levels.WARN)
+    vim.notify("can not recognize the error line", vim.log.levels.WARN)
     return
   end
 
   if vim.fn.filereadable(filePath) == 0 then
-    vim.notify("文件不存在: " .. filePath, vim.log.levels.ERROR)
+    vim.notify("the file is not exsit: " .. filePath, vim.log.levels.ERROR)
     return
   end
 
@@ -75,7 +75,7 @@ local preview_stack_trace_flutter = function()
   local filePath, lineNumber, columnNumber = line:match("([%w%p]+):(%d+):?(%d*)")
 
   if not filePath or not lineNumber then
-    vim.notify("无法解析该行的文件路径或行号", vim.log.levels.WARN)
+    vim.notify("can not recognize the error line", vim.log.levels.WARN)
     return
   end
 
