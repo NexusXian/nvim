@@ -1,24 +1,27 @@
 local preview_stack_trace_go = function()
   local line = vim.api.nvim_get_current_line()
 
+  -- 保存当前 terminal 窗口和光标位置
+  local origin_win = vim.api.nvim_get_current_win()
+  local origin_cursor = vim.api.nvim_win_get_cursor(origin_win)
+
   local patterns = {
-    -- file:line:col
-    { "(.+%.go):(%d+):(%d+)", true },
-
-    -- file:line
-    { "(.+%.go):(%d+)", false },
-
-    -- panic stack: \t/path/file.go:12
-    { "%s+(.+%.go):(%d+)", false },
+    { "(/.-%.go):(%d+):(%d+)", true },
+    { "(/.-%.go):(%d+)%s+%+0x%x+", false },
+    { "(/.-%.go):(%d+)", false },
   }
 
-  local filePath, lineNumber
+  local filePath, lineNumber, colNumber
 
   for _, p in ipairs(patterns) do
-    local path, line, col = line:match(p[1])
-    if path and line then
+    local path, lineNum, colNum = line:match(p[1])
+    if path and lineNum then
+      path = path:gsub("\27%[[0-9;]*m", "")
+      path = path:gsub("%c", "")
+
       filePath = path
-      lineNumber = tonumber(line)
+      lineNumber = tonumber(lineNum)
+      colNumber = tonumber(colNum) or 1
       break
     end
   end
@@ -28,13 +31,34 @@ local preview_stack_trace_go = function()
     return
   end
 
-  -- 切到上窗口打开文件（符合你原来的设计）
+  if vim.fn.filereadable(filePath) == 0 then
+    vim.notify("文件不存在: " .. filePath, vim.log.levels.ERROR)
+    return
+  end
+
+  -- 切到上窗口
   vim.cmd("wincmd k")
   vim.cmd("edit " .. vim.fn.fnameescape(filePath))
-  vim.api.nvim_win_set_cursor(0, { lineNumber, 0 })
-  vim.cmd("normal! zz")
-  vim.cmd("wincmd j")
 
+  vim.schedule(function()
+    if vim.api.nvim_buf_is_loaded(0) then
+      local max_line = vim.api.nvim_buf_line_count(0)
+      if lineNumber > max_line then
+        lineNumber = max_line
+      end
+
+      vim.api.nvim_win_set_cursor(0, { lineNumber, colNumber - 1 })
+      vim.cmd("normal! zz")
+    end
+
+    -- 回到原 terminal 窗口
+    if vim.api.nvim_win_is_valid(origin_win) then
+      vim.api.nvim_set_current_win(origin_win)
+
+      -- 恢复原光标
+      pcall(vim.api.nvim_win_set_cursor, origin_win, origin_cursor)
+    end
+  end)
 end
 
 vim.keymap.set("n", "<leader>gt", preview_stack_trace_go, {
