@@ -1,8 +1,8 @@
 local preview_stack_trace_go = function()
   local line = vim.api.nvim_get_current_line()
 
+  -- 只保存窗口，不保存光标
   local origin_win = vim.api.nvim_get_current_win()
-  local origin_cursor = vim.api.nvim_win_get_cursor(origin_win)
 
   local patterns = {
     { "([%w%./_-]+%.go):(%d+):(%d+)", true },
@@ -17,8 +17,6 @@ local preview_stack_trace_go = function()
     if path and lineNum then
       path = path:gsub("\27%[[0-9;]*m", "")
       path = path:gsub("%c", "")
-
-      -- 转成绝对路径（关键）
       path = vim.fn.fnamemodify(path, ":p")
 
       filePath = path
@@ -52,9 +50,9 @@ local preview_stack_trace_go = function()
       vim.cmd("normal! zz")
     end
 
+    -- 只恢复窗口，不恢复光标
     if vim.api.nvim_win_is_valid(origin_win) then
       vim.api.nvim_set_current_win(origin_win)
-      pcall(vim.api.nvim_win_set_cursor, origin_win, origin_cursor)
     end
   end)
 end
