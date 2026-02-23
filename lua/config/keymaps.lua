@@ -65,7 +65,7 @@ map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find Reference
 
 -- Code hints and information
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "Hover Documentation" })
-map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Signature Documentation" })
+map("n", "<leader>k", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Signature Documentation" })
 
 -- Code actions
 map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code Action" })
