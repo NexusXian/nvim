@@ -4,7 +4,7 @@ return {
   opts = {
     ensure_installed = {
       "c", "cpp", "go", "gomod", "lua", "html", "css", "javascript", "java", "dart", "python",
-      "rust", "typescript", "tsx", "graphql", "vue", "yaml", "json", "markdown", "toml","zig"
+      "rust", "typescript", "tsx", "graphql", "vue", "yaml", "json", "markdown", "toml", "zig"
     },
     auto_install = true,
     highlight = {
@@ -16,6 +16,12 @@ return {
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
 
+
+
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.opt.foldlevel = 99
+    vim.opt.foldenable = true
     -- 为 Go 文件添加自动命令确保高亮启用
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "go",
