@@ -12,7 +12,7 @@ return {
           diagnostics = "nvim_lsp",
           show_buffer_close_icons = false,
           show_close_icon = false,
-          separator_style = "slant", -- 可选："slant", "thick", "thin", { 'left', 'right' }
+          separator_style = "thin", -- 可选："slant", "thick", "thin", { 'left', 'right' }
         },
       })
     end,
