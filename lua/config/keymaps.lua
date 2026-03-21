@@ -1,4 +1,5 @@
 -- Shortcut functions
+--
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 local api = require("dropbar.api")
@@ -218,7 +219,7 @@ map("n", "<leader>g=", ":Gitsigns next_hunk<CR>", { noremap = true, silent = tru
 map("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", { noremap = true, silent = true, desc = "Blame line" })
 map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "Reset hunk" })
 map("n", "<leader>H", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true, desc = "Preview hunk" })
-map("n", "<leader>gB", ":Gitsigns Blame<CR>", { noremap = true, silent = true, desc = "open blame window" })
+map("n", "<leader>gB", ":Gitsigns blame<CR>", { noremap = true, silent = true, desc = "open blame window" })
 
 
 -- slipe the windows
