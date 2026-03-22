@@ -11,7 +11,7 @@ return {
     config = function()
       local api = require("nvim-tree.api")
 
-      -- 写 package 的逻辑
+      -- 创建 Go 文件时自动写入 package
       local function write_go_package(path)
         if not path:match("%.go$") then
           return
@@ -23,14 +23,14 @@ return {
           return
         end
 
-        -- 目录名作为 package
+        -- 目录名作为 package 名
         local pkg = vim.fn.fnamemodify(path, ":h:t")
         if pkg == "." or pkg == "" then
           pkg = "main"
         end
 
         vim.schedule(function()
-          vim.cmd("edit " .. path)
+          vim.cmd("edit " .. vim.fn.fnameescape(path))
           vim.api.nvim_buf_set_lines(0, 0, -1, false, {
             "package " .. pkg,
             "",
@@ -39,9 +39,8 @@ return {
         end)
       end
 
-      -- 订阅 nvim-tree 的文件创建事件
+      -- 订阅 nvim-tree 文件创建事件
       api.events.subscribe(api.events.Event.FileCreated, function(file)
-        -- file.fname 是完整路径
         write_go_package(file.fname)
       end)
 
@@ -51,15 +50,18 @@ return {
             quit_on_open = false,
           },
         },
+
         update_focused_file = {
           enable = true,
           update_cwd = true,
         },
+
         view = {
           width = 30,
           side = "left",
           preserve_window_proportions = true,
         },
+
         renderer = {
           highlight_git = true,
           icons = {
@@ -68,11 +70,28 @@ return {
             },
           },
         },
+
         filters = {
           dotfiles = false,
+        },
+
+        diagnostics = {
+          enable = true,
+          show_on_dirs = true,
+          show_on_open_dirs = true,
+          debounce_delay = 50,
+          severity = {
+            min = vim.diagnostic.severity.HINT,
+            max = vim.diagnostic.severity.ERROR,
+          },
+          icons = {
+            hint = "",
+            info = "",
+            warning = "",
+            error = "",
+          },
         },
       })
     end,
   },
 }
-
