@@ -1,5 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  commit = "066fd650",
   build = ":TSUpdate",
   opts = {
     ensure_installed = {

@@ -34,7 +34,7 @@ require("lazy").setup({
   },
   -- 1. 关闭自动检查更新
   checker = {
-    enabled = false,       -- 改为 false，不再去后台偷偷看有没有新版本
+    enabled = true,       -- 改为 false，不再去后台偷偷看有没有新版本
   },
   -- 2. 关闭配置变更通知
   change_detection = {
@@ -47,5 +47,3 @@ require("lazy").setup({
   },
 })
 
--- 4. 彻底删除原有的 VimEnter 自动更新 autocmd
--- 已经直接删除了 require("lazy").update 的那段代码
