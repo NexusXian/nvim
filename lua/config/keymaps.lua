@@ -122,9 +122,9 @@ map("n", "<F9>", function() require("dap").restart() end,
   { desc = "DAP: Restart debugging" })
 
 -- Breakpoint control
-map("n", "<leader>b", function() require("dap").toggle_breakpoint() end,
+map("n", "<leader>db", function() require("dap").toggle_breakpoint() end,
   { desc = "DAP: Toggle breakpoint" })
-map("n", "<leader>B", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
+map("n", "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
   { desc = "DAP: Set conditional breakpoint" })
 map("n", "<leader>lp", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end,
   { desc = "DAP: Set log point" })
@@ -225,3 +225,10 @@ map("n", "<leader>gB", ":Gitsigns blame<CR>", { noremap = true, silent = true, d
 -- slipe the windows
 map("n", "<leader>vs", "<cmd>vsplit<CR>", { noremap = true, silent = true })
 map("n", "<leader>sw", "<cmd>split<CR>", { noremap = true, silent = true })
+
+
+
+-- yank
+map("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", {
+  desc = "Clipboard history",
+})

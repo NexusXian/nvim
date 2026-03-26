@@ -11,6 +11,9 @@ return {
       'pyright',
       "zls",
       'typescript-language-server',
+      "json-lsp",
+      'rust-analyzer',
+
     },
   },
   config = function(_, opts)
