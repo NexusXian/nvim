@@ -111,18 +111,5 @@ vim.o.undodir = vim.fn.stdpath("data") .. "/undo"
 --保存缓冲区确认
 vim.o.confirm = true
 
--- neovide
-if vim.g.neovide then
-  vim.keymap.set("n", "<C-=>", function()
-    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1
-  end)
 
-  vim.keymap.set("n", "<C-->", function()
-    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1
-  end)
-
-  vim.keymap.set("n", "<C-0>", function()
-    vim.g.neovide_scale_factor = 1.0
-  end)
-end
-
+vim.opt.colorcolumn = "80"

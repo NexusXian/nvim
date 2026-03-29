@@ -4,7 +4,6 @@ return {
   config = function()
     -- 显示当前激活的 LSP 服务器（使用新 API 避免弃用警告）
     local function lsp_client()
-      -- 新 API：vim.lsp.get_clients() 替代 vim.lsp.get_active_clients()
       local clients = vim.lsp.get_clients({ bufnr = 0 })
       if #clients == 0 then
         return ""
@@ -19,7 +18,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'auto',  -- 自动适配主题
+        theme = 'auto',
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {},
