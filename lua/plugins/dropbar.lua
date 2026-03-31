@@ -1,6 +1,7 @@
 return {
   "Bekaboo/dropbar.nvim",
   config = function()
+    local api = require("dropbar.api")
 
     local confirm = function()
       local menu = api.get_current_dropbar_menu()
@@ -23,12 +24,9 @@ return {
 
     require("dropbar").setup({
       menu = {
-        -- When on, automatically set the cursor to the closest previous/next
-        -- clickable component in the direction of cursor movement on CursorMoved
         quick_navigation = true,
-        ---@type table<string, string|function|table<string, string|function>>
         keymaps = {
-          ['<LeftMouse>'] = function()
+          ["<LeftMouse>"] = function()
             local menu = api.get_current_dropbar_menu()
             if not menu then
               return
@@ -44,14 +42,14 @@ return {
               end
               return
             end
-            menu:click_at({ mouse.line, mouse.column }, nil, 1, 'l')
+            menu:click_at({ mouse.line, mouse.column }, nil, 1, "l")
           end,
-          ['<CR>'] = confirm,
-          ['i'] = confirm,
-          ['<esc>'] = quit_curr,
-          ['q'] = quit_curr,
-          ['n'] = quit_curr,
-          ['<MouseMove>'] = function()
+          ["<CR>"] = confirm,
+          ["i"] = confirm,
+          ["<Esc>"] = quit_curr,
+          ["q"] = quit_curr,
+          ["n"] = quit_curr,
+          ["<MouseMove>"] = function()
             local menu = api.get_current_dropbar_menu()
             if not menu then
               return
@@ -65,5 +63,5 @@ return {
         },
       },
     })
-  end
+  end,
 }

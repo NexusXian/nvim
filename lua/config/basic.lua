@@ -112,4 +112,3 @@ vim.o.undodir = vim.fn.stdpath("data") .. "/undo"
 vim.o.confirm = true
 
 
-vim.opt.colorcolumn = "80"

@@ -229,6 +229,6 @@ map("n", "<leader>sw", "<cmd>split<CR>", { noremap = true, silent = true })
 
 
 -- yank
-map("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", {
+vim.keymap.set("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", {
   desc = "Clipboard history",
 })
