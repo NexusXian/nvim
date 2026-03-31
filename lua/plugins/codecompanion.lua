@@ -1,4 +1,5 @@
 return {
+  event = "VeryLazy",
   "olimorris/codecompanion.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",

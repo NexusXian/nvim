@@ -8,6 +8,7 @@ return {
     'L3MON4D3/LuaSnip',
     'rafamadriz/friendly-snippets',
     'onsails/lspkind.nvim',
+    'SergioRibera/cmp-dotenv',
   },
   config = function()
     local cmp = require('cmp')
@@ -20,19 +21,23 @@ return {
 
     -- 跳转快捷键
     vim.keymap.set({ "i", "s" }, "<C-j>", function()
-      if luasnip.jumpable(1) then luasnip.jump(1) end
+      if luasnip.jumpable(1) then
+        luasnip.jump(1)
+      end
     end, { silent = true })
 
     vim.keymap.set({ "i", "s" }, "<C-k>", function()
-      if luasnip.jumpable(-1) then luasnip.jump(-1) end
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      end
     end, { silent = true })
 
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0
         and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
-            :sub(col, col)
-            :match("%s") == nil
+          :sub(col, col)
+          :match("%s") == nil
     end
 
     cmp.setup({
@@ -84,6 +89,7 @@ return {
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
+        { name = 'dotenv' },
         {
           name = 'copilot',
           entry_filter = function()

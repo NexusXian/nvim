@@ -1,4 +1,5 @@
 return {
+  event = "VeryLazy",
   "NexusXian/opencode.nvim",
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()

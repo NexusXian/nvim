@@ -1,5 +1,6 @@
 return {
   {
+    event = "VeryLazy",
     "tpope/vim-dadbod",
     dependencies = {
       "kristijanhusak/vim-dadbod-ui",
