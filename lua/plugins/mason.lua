@@ -1,5 +1,6 @@
 return {
   'williamboman/mason.nvim',
+  event = 'VeryLazy',
   build = ':MasonUpdate',
   opts = {
     ensure_installed = {

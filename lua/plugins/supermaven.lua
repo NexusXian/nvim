@@ -1,6 +1,7 @@
 return {
   {
     "supermaven-inc/supermaven-nvim",
+    event = "VeryLazy",
     config = function()
       -- 在 init.lua 中加载 supermaven 插件
       require("supermaven-nvim").setup({
