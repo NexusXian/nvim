@@ -1,34 +1,75 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-  commit = "066fd650",
-  build = ":TSUpdate",
-  opts = {
-    ensure_installed = {
-      "c", "cpp", "go", "gomod", "lua", "html", "css", "javascript", "java", "dart", "python",
-      "rust", "typescript", "tsx", "graphql", "vue", "yaml", "json", "markdown", "toml", "zig"
-    },
-    auto_install = true,
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = false,
-    },
-    indent = { enable = true },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
+
+    config = function()
+      local ts = require("nvim-treesitter")
+
+      -- 初始化（可选）
+      ts.setup({
+        install_dir = vim.fn.stdpath("data") .. "/site",
+      })
+
+      -- 安装 parser（异步）
+      ts.install({
+        ts.install({
+          "html",
+          "css",
+          "scss",
+          "javascript",
+          "typescript",
+          "tsx",
+          "json",
+          "vue",
+
+          "go",
+          "gomod",
+          "gosum",
+          "gowork",
+          "rust",
+          "java",
+          "python",
+
+          "proto", -- gRPC
+          "sql", -- SQL
+          "graphql", -- API
+
+          "dart",
+
+          "bash",
+          "dockerfile",
+          "yaml",
+          "toml",
+
+          "markdown",
+          "markdown_inline",
+
+          "lua",
+          "vim",
+          "vimdoc",
+
+          "c",
+          "cpp",
+        })
+      })
+
+      -- 自动启用 treesitter
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          local lang = vim.treesitter.language.get_lang(args.match)
+
+          -- 启动高亮
+          pcall(vim.treesitter.start, args.buf, lang)
+        end,
+      })
+
+      -- 折叠
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.opt.foldlevel = 99
+    end,
   },
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
-
-
-
-    vim.opt.foldmethod = "expr"
-    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-    vim.opt.foldlevel = 99
-    vim.opt.foldenable = true
-    -- 为 Go 文件添加自动命令确保高亮启用
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "go",
-      callback = function()
-        vim.cmd("TSBufEnable highlight")
-      end,
-    })
-  end,
 }
