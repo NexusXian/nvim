@@ -1,8 +1,8 @@
 
 #
-因为更新至nvim 0.12之后master分支的tree-sitter变得异常卡顿，直接迁移到了main分支
-所以这个分支是支持0.12之前nvim版本的master分支，但是不再维护已经归档，但可以继续使用
+由于升级到 Neovim 0.12 后，master 分支的 tree-sitter 出现明显卡顿问题，因此已迁移至 main 分支使用。
 
+当前这个分支基于旧的 master 分支（适用于 Neovim 0.12 之前版本），虽然官方已停止维护并归档，但仍然可以正常使用。
 
 # 🌟NexusNvim
 
