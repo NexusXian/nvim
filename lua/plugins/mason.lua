@@ -14,7 +14,7 @@ return {
       'typescript-language-server',
       "json-lsp",
       'rust-analyzer',
-
+      'buf'
     },
   },
   config = function(_, opts)
