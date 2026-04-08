@@ -39,7 +39,7 @@ return {
             local mouse = vim.fn.getmousepos()
             local clicked_menu = utils.menu.get({ win = mouse.winid })
             if clicked_menu then
-              clicked_menu:click_at({ mouse.line, mouse.column - 1 }, nil, 1, "l")
+              clicked_menu:click_at({ mouse.line, mouse.column - 1 }, 0, 1, "l")
               return
             end
             utils.menu.exec("close")
