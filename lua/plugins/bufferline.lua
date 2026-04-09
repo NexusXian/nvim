@@ -8,7 +8,6 @@ return {
   opts = {
     options = {
       mode = "buffers",
-
       diagnostics = "nvim_lsp",
       diagnostics_update_in_insert = false,
 

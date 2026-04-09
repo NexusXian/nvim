@@ -112,3 +112,5 @@ vim.o.undodir = vim.fn.stdpath("data") .. "/undo"
 vim.o.confirm = true
 
 
+-- 垂直滚动1行/次，水平滚动2列/次（可按需调整）
+vim.opt.mousescroll = "ver:1,hor:1"
