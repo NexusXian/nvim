@@ -83,8 +83,6 @@ map("n", "<leader>dl", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "Ope
 map("n", "<leader>dq", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "Open Diagnostics Quickfix List" })
 map("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Open Floating Diagnostic" })
 
--- AI coding assistant
-map("n", "<leader>a", "<cmd>CodeCompanionChat<CR>", { desc = "Open Code Companion Chat" })
 
 -- CompetiTest
 map('n', '<leader>cr', ':CompetiTest run<CR>', {
@@ -198,9 +196,6 @@ map("n", "<M-Down>", "<C-w>-", { noremap = true, silent = true, desc = "Decrease
 map("n", "<M-Right>", "<C-w>>", { noremap = true, silent = true, desc = "Increase window width" })
 map("n", "<M-Left>", "<C-w><", { noremap = true, silent = true, desc = "Decrease window width" })
 
--- open claude code
-map('n', '<leader>cl', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
-
 --go
 map('n', '<leader>gi', '<cmd>GoImports<CR>', { desc = 'Import go package' })
 map('n', '<leader>gmt', '<cmd>GoModTidy<CR>', { desc = 'Tidy go.mod' })
@@ -225,8 +220,6 @@ map("n", "<leader>gB", ":Gitsigns blame<CR>", { noremap = true, silent = true, d
 -- slipe the windows
 map("n", "<leader>vs", "<cmd>vsplit<CR>", { noremap = true, silent = true })
 map("n", "<leader>sw", "<cmd>split<CR>", { noremap = true, silent = true })
-
-
 
 -- yank
 vim.keymap.set("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", {
