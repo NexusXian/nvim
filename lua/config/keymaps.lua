@@ -1,7 +1,6 @@
 -- Shortcut functions
 --
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
 local api = require("dropbar.api")
 
 -- Map 'jk' to Esc in insert mode
@@ -12,6 +11,7 @@ map('n', '<leader>sa', function()
   vim.cmd('normal! ggVG')
 end, { noremap = true, silent = true, desc = "Select all text" })
 
+-- 
 -- Use uppercase Y to copy to system clipboard in normal mode
 map('n', 'Y', '"+yy', { noremap = true, silent = true, desc = "Yank line to system clipboard" })
 
@@ -19,8 +19,6 @@ map('n', 'Y', '"+yy', { noremap = true, silent = true, desc = "Yank line to syst
 map('v', 'Y', '"+y', { noremap = true, silent = true, desc = "Yank selection to system clipboard" })
 
 -- Plugin key mappings
--- nvim-tree file explorer
-map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File Explorer (nvim-tree)" })
 
 -- BufferLine tab navigation
 map("n", "H", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
@@ -208,20 +206,11 @@ map("n", "<leader>ww", ":HopWord<CR>", { silent = true })
 
 map("n", "<leader>ll", ":HopLine<CR>", { silent = true })
 
--- git signs
-map("n", "<leader>g-", ":Gitsigns prev_hunk<CR>", { noremap = true, silent = true, desc = "Prev hunk" })
-map("n", "<leader>g=", ":Gitsigns next_hunk<CR>", { noremap = true, silent = true, desc = "Next hunk" })
-map("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", { noremap = true, silent = true, desc = "Blame line" })
-map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true, desc = "Reset hunk" })
-map("n", "<leader>H", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true, desc = "Preview hunk" })
-map("n", "<leader>gB", ":Gitsigns blame<CR>", { noremap = true, silent = true, desc = "open blame window" })
-
-
 -- slipe the windows
 map("n", "<leader>vs", "<cmd>vsplit<CR>", { noremap = true, silent = true })
 map("n", "<leader>sw", "<cmd>split<CR>", { noremap = true, silent = true })
 
 -- yank
-vim.keymap.set("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", {
+map("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", {
   desc = "Clipboard history",
 })
