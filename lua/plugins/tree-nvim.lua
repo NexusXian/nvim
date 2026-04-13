@@ -1,26 +1,27 @@
 return {
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
+    "nvim-tree/nvim-tree.lua",
     keys = {
       {
         "<leader>e",
-        "<cmd>Neotree toggle left<CR>",
-        desc = "Toggle File Explorer (neo-tree)",
+        "<cmd>NvimTreeToggle<CR>",
+        desc = "Toggle File Explorer (nvim-tree)",
       },
     },
+
     cmd = {
-      "Neotree",
+      "NvimTreeToggle",
+      "NvimTreeOpen",
+      "NvimTreeFocus",
+      "NvimTreeFindFileToggle",
     },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+      local api = require("nvim-tree.api")
+
       -- 创建 Go 文件时自动写入 package
       local function write_go_package(path)
-        if not path or not path:match("%.go$") then
+        if not path:match("%.go$") then
           return
         end
 
@@ -46,86 +47,56 @@ return {
         end)
       end
 
-      require("neo-tree").setup({
-        close_if_last_window = false,
+      -- 订阅 nvim-tree 文件创建事件
+      api.events.subscribe(api.events.Event.FileCreated, function(file)
+        write_go_package(file.fname)
+      end)
 
-        default_component_configs = {
-          git_status = {
-            symbols = {
-              added     = "✚",
-              deleted   = "✖",
-              modified  = "",
-              renamed   = "󰁕",
-              untracked = "",
-              ignored   = "",
-              unstaged  = "󰄱",
-              staged    = "",
-              conflict  = "",
-            },
-          },
-          diagnostics = {
-            symbols = {
-              hint = "",
-              info = "",
-              warn = "",
-              error = "",
-            },
-            highlights = {
-              hint = "DiagnosticSignHint",
-              info = "DiagnosticSignInfo",
-              warn = "DiagnosticSignWarn",
-              error = "DiagnosticSignError",
-            },
-          },
-          indent = {
-            with_expanders = true,
-            expander_collapsed = "",
-            expander_expanded = "",
+      require("nvim-tree").setup({
+        actions = {
+          open_file = {
+            quit_on_open = false,
           },
         },
 
-        window = {
-          position = "left",
+        update_focused_file = {
+          enable = true,
+          update_cwd = true,
+        },
+
+        view = {
           width = 35,
+          side = "left",
+          preserve_window_proportions = true,
         },
 
-        filesystem = {
-          bind_to_cwd = true,
-          cwd_target = {
-            sidebar = "tab",
-            current = "window",
-          },
-
-          follow_current_file = {
-            enabled = true,
-            leave_dirs_open = false,
-          },
-
-          use_libuv_file_watcher = true,
-          hijack_netrw_behavior = "open_default",
-
-          filtered_items = {
-            visible = true,
-            hide_dotfiles = false,
-            hide_gitignored = false,
-            hide_hidden = false,
-          },
-
-          window = {
-            mappings = {
-              ["<cr>"] = "open",
-              ["l"] = "open",
-              ["h"] = "close_node",
+        renderer = {
+          highlight_git = true,
+          icons = {
+            show = {
+              folder_arrow = true,
             },
           },
         },
 
-        event_handlers = {
-          {
-            event = "file_added",
-            handler = function(file_path)
-              write_go_package(file_path)
-            end,
+        filters = {
+          dotfiles = false,
+        },
+
+        diagnostics = {
+          enable = true,
+          show_on_dirs = true,
+          show_on_open_dirs = true,
+          debounce_delay = 50,
+          severity = {
+            min = vim.diagnostic.severity.HINT,
+            max = vim.diagnostic.severity.ERROR,
+          },
+          icons = {
+            hint = "",
+            info = "",
+            warning = "",
+            error = "",
           },
         },
       })
