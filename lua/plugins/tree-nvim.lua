@@ -16,7 +16,6 @@ return {
     },
     cmd = { "Neotree" },
     config = function()
-      -- ✅ 修复1：改用原生 autocmd，比 neo-tree 事件更可靠
       vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
         pattern = "*.go",
         callback = function(args)
@@ -54,11 +53,9 @@ return {
         default_component_configs = {
           indent = {
             with_expanders = true,
-            -- ✅ 修复2：明确写出 Nerd Font 折叠箭头图标
             expander_collapsed = "\u{f054}", --  right arrow
             expander_expanded  = "\u{f078}", --  down arrow
           },
-          -- ✅ 修复2：明确写出文件夹 / 文件图标
           icon = {
             folder_closed    = "\u{f07b}", -- 
             folder_open      = "\u{f07c}", -- 
