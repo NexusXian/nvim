@@ -60,7 +60,12 @@ map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Goto Definitio
 map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "Goto Declaration" })
 map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", { desc = "Goto Type Definition" })
 map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "Goto Implementation" })
-map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Find References" })
+map('n', 'gr', function()
+  require('telescope.builtin').lsp_references({
+    include_declaration = false,
+    show_line = true,
+  })
+end, { desc = 'References (Telescope)' })
 
 -- Code hints and information
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "Hover Documentation" })
