@@ -10,9 +10,9 @@ return {
         light = "latte",
         dark = "frappe",
       },
-      transparent_background = true, -- disables setting the background color.
+      transparent_background = false, -- disables setting the background color.
       float = {
-        transparent = true,          -- enable transparent floating windows
+        transparent = false,          -- enable transparent floating windows
         solid = false,               -- use solid styling for floating windows, see |winborder|
       },
       term_colors = false,           -- sets terminal colors (e.g. `g:terminal_color_0`)
