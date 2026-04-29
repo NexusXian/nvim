@@ -35,7 +35,7 @@ return {
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0
-        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+          and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
           :sub(col, col)
           :match("%s") == nil
     end
@@ -47,6 +47,7 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert({
+        ['<A-y>'] = require('minuet').make_cmp_map(), -- Alt+y 手动触发 AI 补全
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -90,6 +91,7 @@ return {
         { name = 'buffer' },
         { name = 'path' },
         { name = 'dotenv' },
+        { name = 'minuet' },
         {
           name = 'copilot',
           entry_filter = function()

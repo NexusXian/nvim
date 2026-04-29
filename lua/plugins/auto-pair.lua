@@ -32,6 +32,7 @@ return {
 
       -- 与 nvim-cmp 集成
       cmp.event:on(
+
         'confirm_done',
         cmp_autopairs.on_confirm_done({
           map_char = {
