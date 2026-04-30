@@ -1,7 +1,7 @@
 return {
   {
     "supermaven-inc/supermaven-nvim",
-    enabled = false,
+    enabled = true,
     event = "VeryLazy",
     config = function()
       -- 在 init.lua 中加载 supermaven 插件
