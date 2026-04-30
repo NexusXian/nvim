@@ -47,7 +47,6 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert({
-        ['<A-y>'] = require('minuet').make_cmp_map(), -- Alt+y 手动触发 AI 补全
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -91,7 +90,6 @@ return {
         { name = 'buffer' },
         { name = 'path' },
         { name = 'dotenv' },
-        { name = 'minuet' },
         {
           name = 'copilot',
           entry_filter = function()
