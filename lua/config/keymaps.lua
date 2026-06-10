@@ -228,3 +228,15 @@ map("n", "<leader>sw", "<cmd>split<CR>", { noremap = true, silent = true })
 map("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", {
   desc = "Clipboard history",
 })
+
+
+
+vim.keymap.set("n", "<leader>ui", function()
+  vim.lsp.buf.code_action({
+    apply = true,
+    context = {
+      only = { "source.addMissingImports.ts" },
+      diagnostics = {},
+    },
+  })
+end, { desc = "Add all missing TS imports" })
