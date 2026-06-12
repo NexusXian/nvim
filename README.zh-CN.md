@@ -37,7 +37,7 @@ NexusNvim 是一套基于 Lua 和 lazy.nvim 的 Neovim 配置，面向日常编�
 
 ### 1. 安装 Neovim
 
-建议使用 Neovim `0.9+`。
+建议使用 Neovim `0.12+`。
 
 ```bash
 # Arch Linux

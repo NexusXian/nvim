@@ -37,7 +37,7 @@ NexusNvim is a Lua-based Neovim configuration powered by lazy.nvim. It is built 
 
 ### 1. Install Neovim
 
-Neovim `0.9+` is recommended.
+Neovim `0.12+` is recommended.
 
 ```bash
 # Arch Linux
