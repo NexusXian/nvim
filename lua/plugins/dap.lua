@@ -79,6 +79,7 @@ return {
           ensure_installed = {
             "codelldb",
             "delve",
+            "js",
           },
           automatic_installation = true,
         },
@@ -163,7 +164,73 @@ return {
       }
 
       dap.configurations.c = dap.configurations.cpp
-      dap.configurations.rust = dap.configurations.cpp
+
+      dap.configurations.rust = {
+        {
+          name = "Launch (cargo)",
+          type = "codelldb",
+          request = "launch",
+          program = function()
+            local target_dir = vim.fn.getcwd() .. "/target/debug/"
+            local exe = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+            local path = target_dir .. exe
+            if vim.fn.executable(path) == 0 then
+              path = vim.fn.input("Path to executable: ", target_dir, "file")
+            end
+            return path
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+        },
+      }
+
+      -- =========================
+      -- TypeScript / JavaScript
+      -- =========================
+      dap.adapters["pwa-node"] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = "js-debug-adapter",
+          args = { "${port}" },
+        },
+      }
+
+      for _, lang in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+        dap.configurations[lang] = {
+          {
+            name = "Launch file",
+            type = "pwa-node",
+            request = "launch",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+            sourceMaps = true,
+            protocol = "inspector",
+          },
+          {
+            name = "Attach to process",
+            type = "pwa-node",
+            request = "attach",
+            processId = require("dap.utils").pick_process,
+            cwd = "${workspaceFolder}",
+            sourceMaps = true,
+            skipFiles = { "<node_internals>/**/*.js" },
+          },
+          {
+            name = "Debug with ts-node",
+            type = "pwa-node",
+            request = "launch",
+            cwd = "${workspaceFolder}",
+            runtimeArgs = { "-r", "ts-node/register" },
+            runtimeExecutable = "node",
+            args = { "${file}" },
+            sourceMaps = true,
+            protocol = "inspector",
+            console = "integratedTerminal",
+          },
+        }
+      end
 
       -- =========================
       -- Dart
