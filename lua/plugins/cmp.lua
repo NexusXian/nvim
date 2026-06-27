@@ -89,6 +89,7 @@ return {
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
+	{ name = "renpy" },
         { name = 'dotenv' },
         {
           name = 'copilot',
