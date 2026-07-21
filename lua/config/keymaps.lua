@@ -231,7 +231,7 @@ map("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", {
 
 
 
-vim.keymap.set("n", "<leader>ui", function()
+map("n", "<leader>ui", function()
   vim.lsp.buf.code_action({
     apply = true,
     context = {
@@ -240,3 +240,9 @@ vim.keymap.set("n", "<leader>ui", function()
     },
   })
 end, { desc = "Add all missing TS imports" })
+
+map("n", "<F10>", ":w<CR>:!python %<CR>", {
+    desc = "Run Python file"
+})
+
+
