@@ -23,6 +23,18 @@ return {
 
       -- 定义一个全局变量存储动态终端实例
       local dynamic_term = nil
+      local dynamic_term_cmd = nil
+
+      -- 查找 Python 项目根目录并生成模块化运行命令
+      local function python_run_cmd()
+        local file = vim.fn.expand("%:p")
+        local root = vim.fs.root(file, { "pyproject.toml", "setup.py", "setup.cfg", ".git", ".venv" })
+        if not root then
+          return "python3 " .. vim.fn.expand("%:t")
+        end
+        local rel = file:sub(#root + 2):gsub("%.py$", ""):gsub("/", ".")
+        return "cd " .. vim.fn.shellescape(root) .. " && python3 -m " .. rel
+      end
 
       -- 动态设置终端命令
       local function set_command_for_filetype()
@@ -39,7 +51,7 @@ return {
         elseif filetype == "c" then
           return "clang " .. filename .. " -o " .. filename_no_ext .. " && ./" .. filename_no_ext
         elseif filetype == "python" then
-          return "python3 " .. filename
+          return python_run_cmd()
         elseif filetype == "dart" then
           return "dart " .. filename
         elseif filetype == "typescript" then
@@ -60,9 +72,20 @@ return {
           if dynamic_term then
             dynamic_term:close() -- 直接关闭终端
             dynamic_term = nil   -- 释放资源
+            dynamic_term_cmd = nil
           end
           print("Unsupported filetype: " .. vim.bo.filetype)
           return
+        end
+
+        -- 命令变化（如切换文件）：销毁旧终端并重建，确保运行的是当前文件
+        if dynamic_term and dynamic_term_cmd ~= cmd then
+          if dynamic_term.job_id then
+            vim.fn.jobstop(dynamic_term.job_id)
+          end
+          dynamic_term:close()
+          dynamic_term = nil
+          dynamic_term_cmd = nil
         end
 
         if not dynamic_term then
@@ -78,8 +101,10 @@ return {
                 print("Terminated process:", term.job_id)
               end
               dynamic_term = nil -- 清空实例
+              dynamic_term_cmd = nil
             end,
           })
+          dynamic_term_cmd = cmd
         end
 
         -- 切换终端的显示状态

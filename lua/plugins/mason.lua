@@ -15,7 +15,11 @@ return {
       "json-lsp",
       'rust-analyzer',
       'buf',
-      'yaml-language-server'
+      'yaml-language-server',
+      'ruff',
+      'stylua',
+      'prettier',
+      'clang-format'
     },
   },
   config = function(_, opts)

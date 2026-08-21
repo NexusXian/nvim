@@ -120,11 +120,25 @@ return {
             hide_dotfiles = false,
             hide_gitignored = false,
             hide_by_name = { ".git", "node_modules" },
-            never_show  = { ".DS_Store", "thumbs.db" },
+            never_show  = { ".DS_Store", "thumbs.db", "__pycache__" },
           },
         },
 
         sources = { "filesystem", "git_status" },
+      })
+
+      local events = require("neo-tree.events")
+      events.subscribe({
+        event = events.FILE_ADDED,
+        handler = function(dest)
+          if vim.fn.isdirectory(dest) == 0 then return end
+          local init = dest .. "/__init__.py"
+          if vim.fn.filereadable(init) == 1 then return end
+          local root = vim.fs.root(dest,
+            { "pyproject.toml", "setup.py", "setup.cfg", ".venv", "__init__.py" })
+          if not root then return end
+          vim.fn.writefile({}, init)
+        end,
       })
     end,
   },

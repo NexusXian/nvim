@@ -80,6 +80,7 @@ return {
             "codelldb",
             "delve",
             "js",
+            "python",
           },
           automatic_installation = true,
         },
@@ -282,6 +283,42 @@ return {
           request = "launch",
           mode = "test",
           program = "${file}",
+        },
+      }
+      -- =========================
+      -- Python
+      -- =========================
+      dap.adapters.debugpy = function(cb, config)
+        local root = vim.fs.root(vim.fn.expand("%:p"), { "pyproject.toml", "setup.py", "setup.cfg", ".git", ".venv" })
+        local py = root and (root .. "/.venv/bin/python") or "python3"
+        if vim.fn.filereadable(py) == 0 then
+          py = "python3"
+        end
+        cb({
+          type = "executable",
+          command = py,
+          args = { "-m", "debugpy.adapter" },
+        })
+      end
+
+      dap.configurations.python = {
+        {
+          type = "debugpy",
+          name = "Launch module",
+          request = "launch",
+          module = function()
+            local file = vim.fn.expand("%:p")
+            local root = vim.fs.root(file, { "pyproject.toml", "setup.py", "setup.cfg", ".git", ".venv" })
+            if not root then
+              return vim.fn.fnamemodify(file, ":t:r")
+            end
+            return file:sub(#root + 2):gsub("%.py$", ""):gsub("/", ".")
+          end,
+          cwd = function()
+            local root = vim.fs.root(vim.fn.expand("%:p"), { "pyproject.toml", "setup.py", "setup.cfg", ".git", ".venv" })
+            return root or vim.fn.getcwd()
+          end,
+          justMyCode = false,
         },
       }
     end,

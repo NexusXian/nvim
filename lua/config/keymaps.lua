@@ -74,7 +74,7 @@ map("n", "<leader>k", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Sig
 -- Code actions
 map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code Action" })
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename Symbol" })
-map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "Format Code" })
+map("n", "<leader>cf", "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<CR>", { desc = "Format Code" })
 map("n", "<leader>ai",
   "<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>",
   { desc = "Organize Imports" })
@@ -241,8 +241,24 @@ map("n", "<leader>ui", function()
   })
 end, { desc = "Add all missing TS imports" })
 
-map("n", "<F10>", ":w<CR>:!python %<CR>", {
-    desc = "Run Python file"
-})
 
+
+
+local function py_run_cmd()
+    local file = vim.fn.expand("%:p")
+    local root = vim.fs.root(file, { "pyproject.toml", "setup.py", "setup.cfg", ".git", ".venv" })
+    if not root then
+        return "python3 " .. vim.fn.expand("%:t")
+    end
+    local py = root .. "/.venv/bin/python"
+    if vim.fn.filereadable(py) == 0 then
+        py = "python3"
+    end
+    local rel = file:sub(#root + 2):gsub("%.py$", ""):gsub("/", ".")
+    return "cd " .. vim.fn.shellescape(root) .. " && " .. py .. " -m " .. rel
+end
+
+vim.keymap.set("n", "<leader>r", function()
+    vim.cmd("TermExec cmd=" .. vim.fn.shellescape(py_run_cmd()))
+end)
 
