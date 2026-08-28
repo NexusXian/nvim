@@ -25,22 +25,8 @@ return {
     },
     config = function(_, opts)
       local autopairs = require('nvim-autopairs')
-      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-      local cmp = require('cmp')
 
       autopairs.setup(opts)
-
-      -- 与 nvim-cmp 集成
-      cmp.event:on(
-
-        'confirm_done',
-        cmp_autopairs.on_confirm_done({
-          map_char = {
-            tex = '' -- 在 TeX 文件中禁用
-          }
-        })
-      )
     end,
-    -- 移除了包含 require('cmp') 的 config 函数
   },
 }

@@ -4,8 +4,7 @@ return {
 	dependencies = {
 		'williamboman/mason.nvim',
 		'williamboman/mason-lspconfig.nvim',
-		'hrsh7th/cmp-nvim-lsp',
-		'onsails/lspkind.nvim',
+		'saghen/blink.cmp',
 	},
 	config = function()
 		-- 引入公共配置

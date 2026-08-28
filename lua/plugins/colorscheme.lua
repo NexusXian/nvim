@@ -61,7 +61,7 @@ return {
 			custom_highlights = {},
 			auto_integrations = true,
 			integrations = {
-				cmp = true,
+				blink_cmp = true,
 				gitsigns = true,
 				nvimtree = true,
 				notify = false,

@@ -1,12 +1,9 @@
--- 公共 LSP 配置：capabilities / format_on_save / cmp 格式 / diagnostic 行尾报错
-
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local lspkind = require("lspkind")
+-- 公共 LSP 配置：capabilities / format_on_save / diagnostic 行尾报错
 
 ----------------------------------------------------------------
 -- capabilities（给所有 LSP 复用）
 ----------------------------------------------------------------
-local capabilities = cmp_nvim_lsp.default_capabilities()
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 ----------------------------------------------------------------
 -- 保存时自动格式化
@@ -23,27 +20,6 @@ local format_on_save = function(client, bufnr)
       end,
     })
   end
-end
-
-----------------------------------------------------------------
--- cmp 补全项格式（lspkind + 来源标签）
-----------------------------------------------------------------
-local custom_format = function(entry, vim_item)
-  vim_item = lspkind.cmp_format({
-    mode = "symbol_text",
-    maxwidth = 50,
-    ellipsis_char = "...",
-  })(entry, vim_item)
-
-  vim_item.menu = string.format(" [%s]", ({
-    nvim_lsp = "LSP",
-    luasnip = "Snippet",
-    buffer = "Buffer",
-    path = "Path",
-    copilot = "AI",
-  })[entry.source.name] or "")
-
-  return vim_item
 end
 
 ----------------------------------------------------------------
@@ -96,5 +72,4 @@ vim.api.nvim_create_autocmd("CursorHold", {
 return {
   capabilities = capabilities,
   format_on_save = format_on_save,
-  format = custom_format,
 }
