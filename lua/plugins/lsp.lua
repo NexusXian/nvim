@@ -19,6 +19,7 @@ return {
 		require('config.lspconfig.lua_ls')
 		require('config.lspconfig.clangd')
 		require('config.lspconfig.rust')
+		require('config.lspconfig.vue')
 		-- 配置 mason-lspconfig
 		mason_lsp.setup({
 			ensure_installed = {
@@ -29,8 +30,10 @@ return {
 				'clangd',
 				'gopls',
 				'rust_analyzer',
+				'ts_ls',
+				'vue_ls',
 			},
-			automatic_installation = true,
+			automatic_enable = true,
 		})
 	end,
 }
