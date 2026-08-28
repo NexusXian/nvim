@@ -19,6 +19,8 @@ return {
       ["<C-Space>"] = { "show" },
       ["<C-e>"] = { "hide" },
       ["<CR>"] = { "accept", "fallback" },
+      ["<Up>"] = { "select_prev", "fallback" },
+      ["<Down>"] = { "select_next", "fallback" },
       ["<Tab>"] = {
         "select_next",
         "snippet_forward",
