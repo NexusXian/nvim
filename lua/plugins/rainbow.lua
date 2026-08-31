@@ -4,7 +4,6 @@ return {
     event = "VeryLazy",
     config = function()
       local rainbow_delimiters = require("rainbow-delimiters")
-
       
       vim.g.rainbow_delimiters = {
         strategy = {
@@ -31,4 +30,3 @@ return {
     end
   }
 }
-
