@@ -56,7 +56,13 @@ return {
         renpy = { inherit_defaults = true, "renpy" },
       },
       providers = {
-        lsp = { fallbacks = {} },
+        lsp = {
+          fallbacks = {},
+          score_offset = function(ctx)
+            local before = ctx.line:sub(1, ctx.cursor[2])
+            return before:match("[%.:%-]%w-$") and 10 or 0
+          end,
+        },
         dotenv = {
           name = "dotenv",
           module = "blink.compat.source",
