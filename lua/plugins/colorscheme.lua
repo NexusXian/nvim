@@ -1,10 +1,10 @@
 return {
-  "tandy1229/deus.nvim",
+  "EdenEast/nightfox.nvim",
   lazy = false,
   priority = 1000,
 
   config = function()
     vim.opt.termguicolors = true
-    vim.cmd.colorscheme("deus")
+    vim.cmd.colorscheme("nordfox")
   end,
 }

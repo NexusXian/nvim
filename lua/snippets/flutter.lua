@@ -2,6 +2,7 @@ local ls = require("luasnip") -- 确保你引入了 luasnip
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+local rep = require("luasnip.extras").rep
 
 return {
 
@@ -30,10 +31,10 @@ return {
     i(1, "MyWidget"),
     t(" extends StatelessWidget {"),
     t({ "", "  const " }),
-    i(2, "MyWidget"),
+    rep(1),
     t("({super.key});"),
     t({ "", "", "  @override", "  Widget build(BuildContext context) {", "    return " }),
-    i(3, "Container()"),
+    i(2, "Container()"),
     t({ ";", "  }", "}" }),
   }),
 
@@ -45,18 +46,18 @@ return {
     i(1, "MyWidget"),
     t(" extends StatefulWidget {"),
     t({ "", "  const " }),
-    i(2, "MyWidget"),
+    rep(1),
     t("({super.key});"),
     t({ "", "", "  @override", "  State<" }),
-    i(3, "MyWidget"),
+    rep(1),
     t("> createState() => _"),
-    i(4, "MyWidget"),
-    t("State();", "}", "", "class _"),
-    i(5, "MyWidget"),
+    rep(1),
+    t({ "State();", "}", "", "class _" }),
+    rep(1),
     t("State extends State<"),
-    i(6, "MyWidget"),
-    t("> {", "", "  @override", "  Widget build(BuildContext context) {", "    return " }),
-    i(7, "Container()"),
+    rep(1),
+    t({ "> {", "", "  @override", "  Widget build(BuildContext context) {", "    return " }),
+    i(2, "Container()"),
     t({ ";", "  }", "}" }),
   }),
 
@@ -238,4 +239,3 @@ return {
   }),
 
 }
-

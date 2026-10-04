@@ -8,11 +8,11 @@ return {
         use_treesitter = true, -- 使用 treesitter 解析代码块
         delay = 0,
         chars = {              -- 代码块边框字符
-          horizontal_line = "─",
-          vertical_line = "│",
-          left_top = "╭",
-          left_bottom = "╰",
-          right_arrow = ">",
+          -- horizontal_line = "─",
+          -- vertical_line = "│",
+          -- left_top = "╭",
+          -- left_bottom = "╰",
+          -- right_arrow = ">",
         },
         style = {             -- 高亮样式
           { fg = "#806d9c" }, -- 正常代码块颜色

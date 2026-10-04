@@ -34,7 +34,7 @@ return {
       default_run_args = nil,
 
       widget_guides = {
-        enabled = false,
+        enabled = true,
       },
 
       dev_log = {
@@ -51,7 +51,7 @@ return {
       },
 
       outline = {
-        open_cmd = "20vnew",
+        open_cmd = "50vnew",
         auto_open = false,
       },
 
