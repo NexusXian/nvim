@@ -23,7 +23,13 @@ return {
       ["<Down>"] = { "select_next", "fallback" },
       ["<Tab>"] = {
         "select_next",
-        "snippet_forward",
+        function()
+          local luasnip = require("luasnip")
+          if luasnip.jumpable(1) and luasnip.in_snippet() then
+            luasnip.jump(1)
+            return true
+          end
+        end,
         function(cmp)
           local line, col = unpack(vim.api.nvim_win_get_cursor(0))
           local before_cursor = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col)
@@ -35,7 +41,17 @@ return {
         end,
         "fallback",
       },
-      ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+      ["<S-Tab>"] = {
+        "select_prev",
+        function()
+          local luasnip = require("luasnip")
+          if luasnip.jumpable(-1) and luasnip.in_snippet() then
+            luasnip.jump(-1)
+            return true
+          end
+        end,
+        "fallback",
+      },
     },
     snippets = { preset = "luasnip" },
     completion = {

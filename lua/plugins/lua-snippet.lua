@@ -24,5 +24,12 @@ return {
         luasnip.jump(-1)
       end
     end, { silent = true })
+
+    vim.keymap.set({ "i", "s" }, "<Esc>", function()
+      if luasnip.session.current_nodes[vim.api.nvim_get_current_buf()] then
+        luasnip.unlink_current()
+      end
+      return "<Esc>"
+    end, { expr = true, silent = true })
   end,
 }
