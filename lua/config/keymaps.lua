@@ -80,8 +80,8 @@ map("n", "<leader>ai",
   { desc = "Organize Imports" })
 
 -- Diagnostic errors
-map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "Previous Diagnostic" })
-map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", { desc = "Next Diagnostic" })
+map("n", "[d", "<cmd>lua vim.diagnostic.jump({ count = -1, float = true })<CR>", { desc = "Previous Diagnostic" })
+map("n", "]d", "<cmd>lua vim.diagnostic.jump({ count = 1, float = true })<CR>", { desc = "Next Diagnostic" })
 map("n", "<leader>dl", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "Open Diagnostics Location List" })
 map("n", "<leader>dq", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "Open Diagnostics Quickfix List" })
 map("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Open Floating Diagnostic" })
@@ -261,4 +261,3 @@ end
 vim.keymap.set("n", "<leader>r", function()
     vim.cmd("TermExec cmd=" .. vim.fn.shellescape(py_run_cmd()))
 end)
-
