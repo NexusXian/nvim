@@ -4,6 +4,15 @@ vim.lsp.config('clangd', {
   capabilities = lsp_common.capabilities,
   cmd = { "clangd" },
 
+  on_attach = function(_, bufnr)
+    if vim.bo[bufnr].filetype == "cpp" then
+      vim.bo[bufnr].tabstop = 4
+      vim.bo[bufnr].softtabstop = 4
+      vim.bo[bufnr].shiftwidth = 4
+      vim.bo[bufnr].expandtab = true
+    end
+  end,
+
   on_new_config = function(new_config, root_dir)
     local ft = vim.bo.filetype
 
@@ -19,4 +28,3 @@ vim.lsp.config('clangd', {
     end
   end,
 })
-
