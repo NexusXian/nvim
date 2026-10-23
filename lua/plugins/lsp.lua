@@ -32,7 +32,8 @@ return {
 				'ts_ls',
 				'vue_ls',
 			},
-			automatic_enable = true,
+			-- C# 由 roslyn.nvim 负责，避免 csharp_ls 重复挂载
+			automatic_enable = { exclude = { 'csharp_ls' } },
 		})
 	end,
 }

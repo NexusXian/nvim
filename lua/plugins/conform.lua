@@ -26,6 +26,7 @@ return {
       c = { "clang_format" },
       cpp = { "clang_format" },
       rust = { "rustfmt" },
+      cs = { "csharpier" },
       go = { "gofmt" },
       css = { "prettier" },
       scss = { "prettier" },

@@ -286,6 +286,33 @@ return {
         },
       }
       -- =========================
+      -- C# (.NET)
+      -- =========================
+      dap.adapters.coreclr = {
+        type = "executable",
+        command = "netcoredbg",
+        args = { "--interpreter=vscode" },
+      }
+
+      dap.configurations.cs = {
+        {
+          type = "coreclr",
+          name = "Launch .NET dll",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
+          end,
+          cwd = "${workspaceFolder}",
+        },
+        {
+          type = "coreclr",
+          name = "Attach to process",
+          request = "attach",
+          processId = require("dap.utils").pick_process,
+        },
+      }
+
+      -- =========================
       -- Python
       -- =========================
       dap.adapters.debugpy = function(cb, config)
