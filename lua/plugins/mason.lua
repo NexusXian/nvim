@@ -3,6 +3,11 @@ return {
   event = 'VeryLazy',
   build = ':MasonUpdate',
   opts = {
+    -- Crashdummyy 源提供与 VS Code 同版本的 roslyn
+    registries = {
+      'github:mason-org/mason-registry',
+      'github:Crashdummyy/mason-registry',
+    },
     ensure_installed = {
       'lua-language-server',
       'eslint-lsp',
@@ -19,7 +24,10 @@ return {
       'ruff',
       'stylua',
       'prettier',
-      'clang-format'
+      'clang-format',
+      'roslyn',
+      'csharpier',
+      'netcoredbg',
     },
   },
   config = function(_, opts)

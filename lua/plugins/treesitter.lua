@@ -53,6 +53,8 @@ return {
 
           "c",
           "cpp",
+          "c_sharp",
+          "hlsl", -- Unity shader
         })
       })
 
