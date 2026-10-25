@@ -60,6 +60,8 @@ return {
           return "cargo run" -- Rust 项目默认使用 Cargo
         elseif filetype == "lua" then
           return "lua " .. filename
+        elseif filetype == "cs" then
+          return "dotnet run"
         else
           return nil         -- 未支持的文件类型
         end
