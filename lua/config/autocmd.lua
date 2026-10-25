@@ -10,6 +10,17 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
+-- C# 文件默认缩进为 4 空格
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "cs", "razor" },
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.softtabstop = 4
+    vim.bo.shiftwidth = 4
+    vim.bo.expandtab = true
+  end,
+})
+
 -- 创建自动命令
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = highlight_group,

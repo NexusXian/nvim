@@ -14,12 +14,6 @@ return {
 
     vim.lsp.config("roslyn", {
       capabilities = lsp_common.capabilities,
-      on_attach = function(_, bufnr)
-        vim.bo[bufnr].tabstop = 4
-        vim.bo[bufnr].softtabstop = 4
-        vim.bo[bufnr].shiftwidth = 4
-        vim.bo[bufnr].expandtab = true
-      end,
       settings = {
         ["csharp|inlay_hints"] = {
           csharp_enable_inlay_hints_for_implicit_object_creation = true,
