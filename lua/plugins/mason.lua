@@ -10,7 +10,7 @@ return {
     },
     ensure_installed = {
       'lua-language-server',
-      'eslint-lsp',
+      'oxlint',
       'html-lsp',
       'css-lsp',
       'clangd',

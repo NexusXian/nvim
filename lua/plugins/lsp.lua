@@ -14,7 +14,7 @@ return {
 		-- 加载所有 LSP 服务器配置
 		require('config.lspconfig.cssls')
 		require('config.lspconfig.html')
-		require('config.lspconfig.eslint')
+		require('config.lspconfig.oxlint')
 		require('config.lspconfig.lua_ls')
 		require('config.lspconfig.clangd')
 		require('config.lspconfig.rust')
@@ -23,7 +23,7 @@ return {
 		mason_lsp.setup({
 			ensure_installed = {
 				'lua_ls',
-				'eslint',
+				'oxlint',
 				'html',
 				'cssls',
 				'clangd',
@@ -33,7 +33,8 @@ return {
 				'vue_ls',
 			},
 			-- C# 由 roslyn.nvim 负责，避免 csharp_ls 重复挂载
-			automatic_enable = { exclude = { 'csharp_ls' } },
+			-- eslint 已由 oxlint 取代，避免 mason-lspconfig 自动重新启用
+			automatic_enable = { exclude = { 'csharp_ls', 'eslint' } },
 		})
 	end,
 }

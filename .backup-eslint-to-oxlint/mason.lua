@@ -1,0 +1,44 @@
+return {
+  'williamboman/mason.nvim',
+  event = 'VeryLazy',
+  build = ':MasonUpdate',
+  opts = {
+    -- Crashdummyy 源提供与 VS Code 同版本的 roslyn
+    registries = {
+      'github:mason-org/mason-registry',
+      'github:Crashdummyy/mason-registry',
+    },
+    ensure_installed = {
+      'lua-language-server',
+      'eslint-lsp',
+      'html-lsp',
+      'css-lsp',
+      'clangd',
+      'pyright',
+      "zls",
+      'typescript-language-server',
+      "json-lsp",
+      'rust-analyzer',
+      'buf',
+      'yaml-language-server',
+      'ruff',
+      'stylua',
+      'prettier',
+      'clang-format',
+      'roslyn',
+      'csharpier',
+      'netcoredbg',
+    },
+  },
+  config = function(_, opts)
+    require('mason').setup(opts)
+    local registry = require('mason-registry')
+
+    for _, tool in ipairs(opts.ensure_installed) do
+      local ok, package = pcall(registry.get_package, tool)
+      if ok and not package:is_installed() then
+        package:install()
+      end
+    end
+  end,
+}
