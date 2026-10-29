@@ -29,12 +29,9 @@ vim.lsp.config('ts_ls', {
   },
 
   -- 优先识别项目根目录（package.json/tsconfig.json/jsconfig.json）
-  root_dir = require('lspconfig.util').root_pattern(
-    'package.json',
-    'tsconfig.json',
-    'jsconfig.json',
-    '.git'
-  ),
+  root_dir = function(bufnr, on_dir)
+    on_dir(vim.fs.root(bufnr, { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' }))
+  end,
 
   on_attach = function(client, bufnr)
     -- 禁用 tsserver 格式化（格式化手动触发，走 prettier/conform）
@@ -60,51 +57,13 @@ vim.lsp.config('ts_ls', {
       desc = 'React/TSX 自动导入未引入的模块（Hooks/组件）'
     })
 
-    -- ========== React 开发体验优化 ==========
-    -- 1. 光标悬停提示 React 导入建议（新手友好）
-    vim.api.nvim_create_autocmd('CursorHold', {
-      buffer = bufnr,
-      callback = function()
-        local params = vim.lsp.util.make_position_params()
-        client.request('textDocument/codeAction', {
-          textDocument = params.textDocument,
-          range = params.range,
-          context = { diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr) }
-        }, function(err, result)
-          if err or not result then return end
-          local import_actions = vim.tbl_filter(function(action)
-            return action.title:find('Import %w+') ~= nil and action.title:find('react') ~= nil
-          end, result)
-          if #import_actions > 0 then
-            vim.notify('React 导入提示：按 <leader>ia 导入 ' .. import_actions[1].title,
-              vim.log.levels.INFO, { timeout = 3000 })
-          end
-        end)
-      end
-    })
-
-    -- 2. 保存时优化 React 导入（整理+自动修复）
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      buffer = bufnr,
-      callback = function()
-        -- 先整理 React 导入（删除未使用的 Hooks/组件）
-        vim.lsp.buf.code_action({
-          filter = function(action)
-            return action.title == 'Organize imports'
-                or action.title == '整理导入'
-          end,
-          apply = true
-        })
-        -- 自动修复 React 相关的 lint 问题（如 Hooks 规则）
-        vim.lsp.buf.code_action({
-          filter = function(action)
-            return action.title:find('Fix all') ~= nil
-          end,
-          apply = true
-        })
-      end,
-      desc = '保存时优化 React/TSX 导入和代码修复'
-    })
+    -- 手动整理导入 / 修复全部
+    vim.keymap.set('n', '<leader>io', function()
+      vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports.ts' }, diagnostics = {} }, apply = true })
+    end, { buffer = bufnr, desc = 'TS 整理导入' })
+    vim.keymap.set('n', '<leader>if', function()
+      vim.lsp.buf.code_action({ context = { only = { 'source.fixAll.ts' }, diagnostics = {} }, apply = true })
+    end, { buffer = bufnr, desc = 'TS 修复全部' })
   end,
 
   -- React 专属的 tsserver 配置
