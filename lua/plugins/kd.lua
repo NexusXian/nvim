@@ -1,13 +1,13 @@
 return {
   "SilverofLight/kd_translate.nvim",
-  key = "<leader>t",
+  cmd = { "TranslateNormal", "TranslateVisual" },
+  keys = {
+    { "<leader>t", ":TranslateNormal<CR>", mode = "n", desc = "Translate" },
+    { "<leader>t", ":TranslateVisual<CR>", mode = "v", desc = "Translate" },
+  },
   config = function()
     require("kd").setup({
-      window = {
-        -- your window config here
-      }
+      window = {},
     })
   end,
-  vim.keymap.set("n", "<leader>t", ":TranslateNormal<CR>"),
-  vim.keymap.set("v", "<leader>t", ":TranslateVisual<CR>")
 }

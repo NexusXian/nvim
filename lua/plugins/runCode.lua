@@ -7,7 +7,7 @@ return {
 
       require("toggleterm").setup({
         size = 7,                -- 终端窗口的默认大小
-        open_mapping = [[<ctrl>-t]], -- 打开/关闭终端的快捷键
+        open_mapping = [[<c-t>]], -- 打开/关闭终端的快捷键
         hide_numbers = true,      -- 隐藏行号
         shade_filetypes = {},
         shade_terminals = true,   -- 为终端启用背景阴影
@@ -25,15 +25,19 @@ return {
       local dynamic_term = nil
       local dynamic_term_cmd = nil
 
-      -- 查找 Python 项目根目录并生成模块化运行命令
+      -- 查找 Python 项目根目录并生成模块化运行命令（优先 .venv）
       local function python_run_cmd()
         local file = vim.fn.expand("%:p")
         local root = vim.fs.root(file, { "pyproject.toml", "setup.py", "setup.cfg", ".git", ".venv" })
         if not root then
           return "python3 " .. vim.fn.expand("%:t")
         end
+        local py = root .. "/.venv/bin/python"
+        if vim.fn.filereadable(py) == 0 then
+          py = "python3"
+        end
         local rel = file:sub(#root + 2):gsub("%.py$", ""):gsub("/", ".")
-        return "cd " .. vim.fn.shellescape(root) .. " && python3 -m " .. rel
+        return "cd " .. vim.fn.shellescape(root) .. " && " .. py .. " -m " .. rel
       end
 
       -- 动态设置终端命令
@@ -124,8 +128,8 @@ return {
         callback = fix_toggle_key,
       })
 
-      -- 为快捷键绑定动态终端
-      vim.keymap.set("n", "m", toggle_dynamic_term, { noremap = true, silent = true })
+      -- 运行当前文件（多语言动态终端）
+      vim.keymap.set("n", "<leader>r", toggle_dynamic_term, { noremap = true, silent = true, desc = "Run current file" })
     end,
   },
 }

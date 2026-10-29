@@ -1,9 +1,5 @@
-local lsp_common = require('config.lspconfig.init') -- 保留通用配置引用
-
--- 配置 pyright 服务器
+-- 配置 pyright 服务器（capabilities 已由 init.lua 的 '*' 全局注入）
 vim.lsp.config('pyright', {
-  capabilities = lsp_common.capabilities,
-
   settings = {
     python = {
       analysis = {

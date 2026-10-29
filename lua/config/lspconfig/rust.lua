@@ -1,8 +1,5 @@
-local lsp_common = require('config.lspconfig.init')  -- 保留通用配置引用
-
+-- rust_analyzer：clippy 保存检查 + rustfmt（格式化由手动触发）
 vim.lsp.config('rust_analyzer', {
-  on_attach = lsp_common.on_attach,  -- 复用通用 on_attach（如快捷键、格式化）
-  capabilities = lsp_common.capabilities,  -- 复用通用补全能力
   settings = {
     ["rust-analyzer"] = {
       checkOnSave = {
@@ -10,7 +7,7 @@ vim.lsp.config('rust_analyzer', {
         command = "clippy"  -- 保存时用 clippy 进行严格检查（需安装：rustup component add clippy）
       },
       rustfmt = {
-        enable = true  -- 启用 rustfmt 自动格式化
+        enable = true  -- rustfmt 作为 LSP 格式化提供者（手动调用）
       },
       cargo = {
         allFeatures = true  -- 启用所有 Cargo 特性

@@ -1,59 +1,24 @@
--- 公共 LSP 配置：capabilities / format_on_save / diagnostic 行尾报错
+-- 公共 LSP 配置：capabilities 全局注入 / diagnostic 悬停报错
 
 ----------------------------------------------------------------
--- capabilities（给所有 LSP 复用）
+-- capabilities（通过 '*' 全局注入给所有 LSP，含 roslyn.nvim）
 ----------------------------------------------------------------
 local capabilities = require("blink.cmp").get_lsp_capabilities()
+vim.lsp.config('*', { capabilities = capabilities })
 
 ----------------------------------------------------------------
--- 保存时自动格式化
-----------------------------------------------------------------
-local format_on_save = function(client, bufnr)
-  if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({
-          bufnr = bufnr,
-          timeout_ms = 2000,
-        })
-      end,
-    })
-  end
-end
-
-----------------------------------------------------------------
--- Diagnostic 配置：❗报错直接显示在行尾
+-- Diagnostic 配置：行内只留红/黄波浪线，详细报错走悬停浮窗
 ----------------------------------------------------------------
 vim.diagnostic.config({
-  virtual_text = {
-    prefix = "󰅚",       -- 行尾提示图标
-    spacing = 2,         -- 与代码的间距
-    source = "if_many",  -- 多来源才显示
-  },
+  virtual_text = false,       -- 不在代码右侧铺开报错文本，保证可读性
   signs = false,          -- 左侧符号列
-  underline = true,      -- 波浪线
-  update_in_insert = false, -- 插入模式不刷新（推荐）
+  underline = true,      -- 红色/黄色波浪线标记
+  update_in_insert = false, -- 插入模式不刷新
   severity_sort = true,
   float = {
     border = "rounded",
     source = "always",
   },
-})
-
-----------------------------------------------------------------
--- 插入模式隐藏行尾报错，退出插入模式再显示（可选但强烈推荐）
-----------------------------------------------------------------
-vim.api.nvim_create_autocmd("InsertEnter", {
-  callback = function()
-    vim.diagnostic.config({ virtual_text = false })
-  end,
-})
-
-vim.api.nvim_create_autocmd("InsertLeave", {
-  callback = function()
-    vim.diagnostic.config({ virtual_text = true })
-  end,
 })
 
 ----------------------------------------------------------------
@@ -67,9 +32,8 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 ----------------------------------------------------------------
--- 对外导出
+-- 对外导出（roslyn.nvim 等插件使用）
 ----------------------------------------------------------------
 return {
   capabilities = capabilities,
-  format_on_save = format_on_save,
 }

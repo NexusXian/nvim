@@ -1,9 +1,5 @@
-local lsp_common = require('config.lspconfig.init')  -- 保留通用配置引用
-
--- configure zig server  
-vim.lsp.config('zls', {
-  capabilities = lsp_common.capabilities,  -- 复用通用补全能力
-})
+-- configure zig server（capabilities 已由 init.lua 的 '*' 全局注入）
+vim.lsp.config('zls', {})
 
 -- start zig server
 vim.lsp.enable('zls')

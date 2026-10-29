@@ -1,8 +1,5 @@
-local lsp_common = require('config.lspconfig.init')  -- 保留通用配置引用
-
--- 配置 cssls（替代原 lspconfig.cssls.setup）
+-- 配置 cssls 服务器（capabilities 已由 init.lua 的 '*' 全局注入）
 vim.lsp.config('cssls', {
-  capabilities = lsp_common.capabilities,  -- 复用通用补全能力
   settings = {
     css = { validate = true, lint = { unknownAtRules = 'ignore' } },  -- 忽略未知的 CSS at-rules
     scss = { validate = true },

@@ -1,8 +1,5 @@
-local lsp_common = require('config.lspconfig.init')  -- 保留通用配置引用
-
--- 配置 lua_ls 服务器
+-- 配置 lua_ls 服务器（capabilities 已由 init.lua 的 '*' 全局注入）
 vim.lsp.config('lua_ls', {
-  capabilities = lsp_common.capabilities,  -- 复用通用补全能力
   settings = {
     Lua = {
       diagnostics = { globals = { 'vim' } },  -- 识别 vim 全局变量，避免报错

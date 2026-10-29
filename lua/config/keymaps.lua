@@ -4,7 +4,7 @@ local map = vim.keymap.set
 local api = require("dropbar.api")
 
 -- Map 'jk' to Esc in insert mode
-map('i', 'jk', '<Esc>', { noremap = true, silent = true, desc = "Exit insert mode" })
+map('i', 'jk', '<Esc>', { remap = true, silent = true, desc = "Exit insert mode" })
 
 -- Map Ctrl + a to select all in normal mode
 map('n', '<leader>sa', function()
@@ -58,7 +58,7 @@ map("n", "<C-l>", "<C-w>l", { noremap = true, silent = true, desc = "Navigate ri
 -- Code navigation
 map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Goto Definition" })
 map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "Goto Declaration" })
-map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", { desc = "Goto Type Definition" })
+map("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", { desc = "Goto Type Definition" })
 map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "Goto Implementation" })
 map('n', 'gr', function()
   require('telescope.builtin').lsp_references({
@@ -82,9 +82,7 @@ map("n", "<leader>ai",
 -- Diagnostic errors
 map("n", "[d", "<cmd>lua vim.diagnostic.jump({ count = -1, float = true })<CR>", { desc = "Previous Diagnostic" })
 map("n", "]d", "<cmd>lua vim.diagnostic.jump({ count = 1, float = true })<CR>", { desc = "Next Diagnostic" })
-map("n", "<leader>dl", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "Open Diagnostics Location List" })
 map("n", "<leader>dq", "<cmd>lua vim.diagnostic.setqflist()<CR>", { desc = "Open Diagnostics Quickfix List" })
-map("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Open Floating Diagnostic" })
 
 
 -- CompetiTest
@@ -159,16 +157,9 @@ map('n', '<Leader>;', api.pick, { desc = "Dropbar: Pick element" })
 map('n', '[c', api.goto_context_start, { desc = "Dropbar: Go to context start" })
 map('n', ']c', api.select_next_context, { desc = "Dropbar: Select next context" })
 
--- Normal mode: <leader>cc comment current line, <leader>cu uncomment
-map('n', '<leader>cc', ':TComment<CR>', { desc = 'Toggle comment/uncomment current line' })
-
--- Visual mode: <leader>cc comment selected area, <leader>cu uncomment selected area
-map('v', '<leader>cc', " :'<' ,' '>TComment<CR>", { desc = 'Toggle comment/uncomment selected area' })
-
-
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Find Files (including hidden files)' })
 map('n', '<leader>fF', '<cmd>Telescope find_files no_ignore=true<cr>', { desc = 'Find Files (including ignored files)' })
-map('n', '<leader>F', '<cmd>Telescope oldfiles<cr>', { desc = 'Find Files (including ignored files)' })
+map('n', '<leader>F', '<cmd>Telescope oldfiles<cr>', { desc = 'Recent files (oldfiles)' })
 
 -- Buffer related
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { desc = 'Search buffers' })
@@ -191,8 +182,6 @@ map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { desc = 'Search help doc
 map('n', '<leader>fm', '<cmd>Telescope marks<cr>', { desc = 'Search marks' })
 map('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { desc = 'Search diagnostic information' })
 map('n', '<leader>fc', '<cmd>Telescope commands<cr>', { desc = 'Search commands' })
--- internal terminal
-map("n", "<C-t>", ":ToggleTerm<CR>")
 -- resize the windows size
 map("n", "<M-Up>", "<C-w>+", { noremap = true, silent = true, desc = "Increase window height" })
 map("n", "<M-Down>", "<C-w>-", { noremap = true, silent = true, desc = "Decrease window height" })
@@ -202,9 +191,6 @@ map("n", "<M-Left>", "<C-w><", { noremap = true, silent = true, desc = "Decrease
 --go
 map('n', '<leader>gi', '<cmd>GoImports<CR>', { desc = 'Import go package' })
 map('n', '<leader>gmt', '<cmd>GoModTidy<CR>', { desc = 'Tidy go.mod' })
---markdown
-map('n', '<leader>mk', '<cmd>MarkdownPreview<CR>', { desc = 'preview markdown in browser' })
-map('n', '<leader>mks', '<cmd>MarkdownPreviewStop<CR>', { desc = 'stop preview markdown' })
 
 --hop
 map("n", "<leader>ww", ":HopWord<CR>", { silent = true })
@@ -231,33 +217,5 @@ map("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", {
 
 
 
-map("n", "<leader>ui", function()
-  vim.lsp.buf.code_action({
-    apply = true,
-    context = {
-      only = { "source.addMissingImports.ts" },
-      diagnostics = {},
-    },
-  })
-end, { desc = "Add all missing TS imports" })
 
-
-
-
-local function py_run_cmd()
-    local file = vim.fn.expand("%:p")
-    local root = vim.fs.root(file, { "pyproject.toml", "setup.py", "setup.cfg", ".git", ".venv" })
-    if not root then
-        return "python3 " .. vim.fn.expand("%:t")
-    end
-    local py = root .. "/.venv/bin/python"
-    if vim.fn.filereadable(py) == 0 then
-        py = "python3"
-    end
-    local rel = file:sub(#root + 2):gsub("%.py$", ""):gsub("/", ".")
-    return "cd " .. vim.fn.shellescape(root) .. " && " .. py .. " -m " .. rel
-end
-
-vim.keymap.set("n", "<leader>r", function()
-    vim.cmd("TermExec cmd=" .. vim.fn.shellescape(py_run_cmd()))
-end)
+-- 运行当前文件：见 plugins/runCode.lua 的 <leader>r（多语言动态终端）
