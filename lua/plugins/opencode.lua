@@ -1,17 +1,33 @@
+local opencode_cmd = "opencode"
+---@type snacks.terminal.Opts
+local snacks_terminal_opts = {
+  win = {
+    position = "right",
+    enter = false,
+  },
+}
+
 return {
   "nickjvandyke/opencode.nvim",
-  version = "*", -- Latest stable release
+  -- "main" supports OpenCode v2
 
   dependencies = {
     {
       "folke/snacks.nvim",
       optional = true,
       opts = {
-        input = {},
+        input = { enabled = true },
         picker = {
+          enabled = true,
           actions = {
-            opencode_send = function(...)
-              return require("opencode").snacks_picker_send(...)
+            opencode_send = function(picker) ---@param picker snacks.Picker
+              local items = vim.tbl_map(function(item) ---@param item snacks.picker.Item
+                return item.file
+                    and require("opencode").format({ path = item.file, from = item.pos, to = item.end_pos })
+                  or item.text
+              end, picker:selected({ fallback = true }))
+
+              require("opencode").prompt(table.concat(items, ", ") .. " ")
             end,
           },
           win = {
@@ -29,13 +45,16 @@ return {
   config = function()
     ---@type opencode.Opts
     vim.g.opencode_opts = {
-      -- 可以以后再加自定义配置
+      server = {
+        start = function()
+          require("snacks.terminal").open(opencode_cmd, snacks_terminal_opts)
+        end,
+      },
     }
 
-    vim.o.autoread = true
     -- Ask（发送当前内容/选区）
     vim.keymap.set({ "n", "x" }, "<leader>aa", function()
-      require("opencode").ask("@this: ", { submit = true })
+      require("opencode").ask("@this: ")
     end, { desc = "Opencode Ask" })
 
     -- 执行动作（select）
@@ -44,26 +63,16 @@ return {
     end, { desc = "Opencode Action" })
 
     -- 打开/关闭窗口
-    vim.keymap.set({ "n" }, "<leader>ac", function()
-      require("opencode").toggle()
+    vim.keymap.set("n", "<leader>ac", function()
+      require("snacks.terminal").toggle(opencode_cmd, snacks_terminal_opts)
     end, { desc = "Opencode Toggle" })
 
-
-    vim.keymap.set({ "n" }, "go", function()
-      return require("opencode").operator("@this ")
+    vim.keymap.set({ "n", "x" }, "go", function()
+      return require("opencode").operator("@this")
     end, { desc = "Add range to opencode", expr = true })
 
     vim.keymap.set("n", "goo", function()
-      return require("opencode").operator("@this ") .. "_"
+      return require("opencode").operator("@this") .. "_"
     end, { desc = "Add line to opencode", expr = true })
-
-
-    vim.keymap.set("n", "<leader>cu", function()
-      require("opencode").command("session.half.page.up")
-    end, { desc = "Opencode Scroll Up" })
-
-    vim.keymap.set("n", "<leader>cd", function()
-      require("opencode").command("session.half.page.down")
-    end, { desc = "Opencode Scroll Down" })
   end,
 }
