@@ -165,13 +165,6 @@ map('n', '<leader>F', '<cmd>Telescope oldfiles<cr>', { desc = 'Recent files (old
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { desc = 'Search buffers' })
 map('n', '<leader>fB', '<cmd>Telescope buffers show_all_buffers=true<cr>', { desc = 'Search all buffers' })
 
--- 搜索当前文件的函数 / 方法列表
-map('n', '<leader>o', function()
-  require('telescope.builtin').lsp_document_symbols({
-    symbols = { 'function', 'method', 'constructor' },
-  })
-end, { desc = 'Search functions in current file' })
-
 -- Search all symbols in current file
 map('n', '<leader>O', '<cmd>Telescope lsp_document_symbols<cr>', {
   desc = 'Search all symbols in current file',

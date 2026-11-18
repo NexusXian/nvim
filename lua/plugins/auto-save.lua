@@ -36,6 +36,7 @@ return {
       local ignore_filetype = {
         "TelescopePrompt",
         "neo-tree",
+        "oil",
         "lazy",
         "mason",
         "toggleterm",

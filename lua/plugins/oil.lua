@@ -23,6 +23,23 @@ return {
         ["<C-l>"] = false,
       },
     },
+    -- wildfire.vim maps <ENTER> buffer-locally (its "disable" hook) on oil's
+    -- nofile buffers via BufReadPost, overriding oil's <CR>. Re-apply after it.
+    config = function(_, opts)
+      require("oil").setup(opts)
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "oil",
+        callback = function(args)
+          vim.schedule(function()
+            if vim.api.nvim_buf_is_valid(args.buf) then
+              vim.keymap.set("n", "<CR>", function()
+                require("oil").select()
+              end, { buffer = args.buf, desc = "Open the entry under the cursor" })
+            end
+          end)
+        end,
+      })
+    end,
   },
   {
     "refractalize/oil-git-status.nvim",
