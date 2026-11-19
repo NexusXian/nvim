@@ -21,6 +21,7 @@ return {
       'rust-analyzer',
       'buf',
       'yaml-language-server',
+      'neocmakelsp',
       'ruff',
       'stylua',
       'prettier',

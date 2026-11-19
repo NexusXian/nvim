@@ -23,6 +23,7 @@ return {
 		require('config.lspconfig.json')
 		require('config.lspconfig.yaml')
 		require('config.lspconfig.protobuf')
+		require('config.lspconfig.neocmakelsp')
 
 		-- gopls 使用 nvim-lspconfig 默认配置（go.nvim 的 lsp_cfg 已禁用）
 		vim.lsp.enable('gopls')
@@ -44,6 +45,7 @@ return {
 				'jsonls',
 				'yamlls',
 				'buf_ls',
+				'neocmake',
 			},
 			automatic_enable = false,
 			-- C# 由 roslyn.nvim 负责；eslint 已由 oxlint 取代
